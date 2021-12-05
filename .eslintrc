@@ -1,7 +1,9 @@
 {
   "parser": "@typescript-eslint/parser",
-  "plugins": ["cypress", "chai-friendly"],
+  "plugins": ["react-hooks", "cypress", "chai-friendly"],
   "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "cypress/no-assigning-return-values": "error",
     "cypress/no-unnecessary-waiting": "error",
     "cypress/assertion-before-screenshot": "warn",
