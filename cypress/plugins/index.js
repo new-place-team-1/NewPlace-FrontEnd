@@ -19,4 +19,13 @@
 module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
-}
+  if (config.testingType === "component") {
+    require("@cypress/react/plugins/react-scripts")(on, config);
+  }
+
+  // use process.env
+  require("dotenv").config();
+  config.env = process.env;
+
+  return config;
+};
