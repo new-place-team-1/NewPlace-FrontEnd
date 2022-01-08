@@ -2,7 +2,4 @@
 . "$(dirname "$0")/_/husky.sh"
 
 yarn lint-staged
-
-if [[ ${GIT_BRANCH} == "feature/"* ]]; then
-  yarn test:unit:run
-fi
+# yarn test:unit:run
