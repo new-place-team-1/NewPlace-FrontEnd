@@ -10,6 +10,8 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 
 export {
   Button,
@@ -24,4 +26,6 @@ export {
   Toolbar,
   BottomNavigation,
   BottomNavigationAction,
+  Tabs,
+  Tab
 };
