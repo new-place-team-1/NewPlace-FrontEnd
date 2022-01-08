@@ -1,0 +1,31 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  cypress:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Create env file
+        shell: bash
+        run: |
+          touch .env
+          bash ./.github/workflows/scripts/env.sh
+      - name: Cypress install
+        uses: cypress-io/github-action@v2
+        with:
+          # Disable running of tests within install job
+          runTests: false
+          build: yarn build
+
+      - name: Cypress run unit
+        run: yarn test:unit:run
+
+      - name: Cypress run integration
+        uses: cypress-io/github-action@v2
+        with:
+          browser: firefox
+          start: yarn start
