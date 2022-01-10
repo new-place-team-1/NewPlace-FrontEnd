@@ -8,8 +8,13 @@ const theme = createTheme({
     primary: {
       main: palette.primaryColor,
     },
-    // red
+    // black
     secondary: {
+      main: palette.font.label,
+      light: palette.font.placeholder,
+    },
+    // red
+    info: {
       dark: palette.selected, // seleted, price
       main: palette.focus, // focus
       light: palette.shadow, // shadow
