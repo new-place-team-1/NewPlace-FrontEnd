@@ -40,7 +40,7 @@ describe("DateField", () => {
     );
   });
 
-  it("Given menuItems, Then render Icon, not items yet", function () {
+  it("Given props, Then render MUI Field with props", function () {
     cy.get(".date-field label").should("have.text", this.props.label);
     cy.get(".date-field input").should("have.attr", "placeholder", this.props.inputFormat.toLowerCase());
   });
