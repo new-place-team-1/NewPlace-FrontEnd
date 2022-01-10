@@ -26,7 +26,7 @@ describe("Field", () => {
     );
   });
 
-  it("Given props, Then render MUI Field with props", function () {
+  it("Given props, Then render MUI-Field with props", function () {
     cy.get("input[name='nickname']")
       .should("have.attr", "placeholder", this.props.placeholder)
       .and("have.attr", "type", "text");

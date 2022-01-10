@@ -8,7 +8,7 @@ function CheckboxField(props: any) {
   const { isSubmitting } = useFormikContext();
 
   return (
-    <div className="field">
+    <div className="checkbox-field">
       <Checkbox {...field} {...props} disabled={isSubmitting} />
       <span>{props.value}</span>
       {meta.touched && meta.error && <StyledErrorMessage className="error">{meta.error}</StyledErrorMessage>}
