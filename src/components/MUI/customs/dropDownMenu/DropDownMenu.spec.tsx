@@ -26,7 +26,7 @@ describe("DropDownMenu", () => {
     };
     mount(
       <ThemeProvider theme={theme}>
-        <DropDownMenu Icon={this.props.Icon} menuItems={this.props.menuItems} />
+        <DropDownMenu {...this.props} />
       </ThemeProvider>,
     );
   });

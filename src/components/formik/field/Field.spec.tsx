@@ -2,10 +2,10 @@ import { mount } from "@cypress/react";
 import { Formik, Form } from "formik";
 import { ThemeProvider } from "@mui/material/styles";
 
-import TextField from ".";
+import Field from ".";
 import theme from "src/utils/contexts/Theme";
 
-describe("TextField", () => {
+describe("Field", () => {
   beforeEach(function () {
     this.props = {
       label: "nickname",
@@ -19,14 +19,14 @@ describe("TextField", () => {
       <ThemeProvider theme={theme}>
         <Formik initialValues={{ nickname: "" }} onSubmit={cy.stub()}>
           <Form>
-            <TextField {...this.props} />
+            <Field {...this.props} />
           </Form>
         </Formik>
       </ThemeProvider>,
     );
   });
 
-  it("Given props, Then render MUI TextField with props", function () {
+  it("Given props, Then render MUI Field with props", function () {
     cy.get("input[name='nickname']")
       .should("have.attr", "placeholder", this.props.placeholder)
       .and("have.attr", "type", "text");

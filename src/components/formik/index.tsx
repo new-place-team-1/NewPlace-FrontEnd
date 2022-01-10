@@ -1,6 +1,8 @@
 import { Formik, Form } from "formik";
 import { useCallback } from "react";
 
+import { isDevelopmentMode } from "src/utils/lib/is";
+
 interface IProps {
   initialValues: object;
   validationSchema?: object;
@@ -11,6 +13,10 @@ interface IProps {
 function CustomForm({ initialValues, validationSchema, handleSubmit, children }: IProps) {
   const onSubmit = useCallback(
     (values, actions) => {
+      if (isDevelopmentMode()) {
+        console.log("[CustomForm] values on submit: ", values);
+      }
+
       handleSubmit(values)
         .then(() => {
           actions.resetForm({

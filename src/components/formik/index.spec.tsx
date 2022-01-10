@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import { ThemeProvider } from "@mui/material/styles";
 
 import CustomForm from ".";
-import TextField from "src/components/formik/textField";
+import Field from "src/components/formik/field";
 import { Button } from "src/components/MUI";
 import theme from "src/utils/contexts/Theme";
 
@@ -18,7 +18,7 @@ describe("CustomForm", () => {
     return (
       <ThemeProvider theme={theme}>
         <CustomForm initialValues={initialValues} validationSchema={validationSchema} handleSubmit={handleSubmit}>
-          <TextField
+          <Field
             label="nickname"
             color="secondary"
             variant="standard"
@@ -26,7 +26,7 @@ describe("CustomForm", () => {
             name="nickname"
             placeholder="type nickname..."
           />
-          <TextField
+          <Field
             label="password"
             color="secondary"
             variant="standard"
@@ -61,13 +61,7 @@ describe("CustomForm", () => {
       validationSchema,
       handleSubmit: cy.stub().as("handleSubmit"),
     };
-    mount(
-      <TestComponent
-        initialValues={this.props.initialValues}
-        validationSchema={this.props.validationSchema}
-        handleSubmit={this.props.handleSubmit}
-      />,
-    );
+    mount(<TestComponent {...this.props} />);
   });
 
   it("When type proper nickname and password and click submit button, Then call handleSubmit", function () {

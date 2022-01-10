@@ -15,7 +15,7 @@ describe("RadioTabs", () => {
     };
     mount(
       <ThemeProvider theme={theme}>
-        <RadioTabs tabsProps={this.props.tabsProps} onChange={this.props.onChange} />
+        <RadioTabs {...this.props} />
       </ThemeProvider>,
     );
   });
