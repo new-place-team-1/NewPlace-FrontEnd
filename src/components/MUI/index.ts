@@ -14,6 +14,8 @@ import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 
+import DatePicker from "@mui/lab/DatePicker";
+
 export {
   Button,
   TextField,
@@ -30,4 +32,5 @@ export {
   BottomNavigationAction,
   Tabs,
   Tab,
+  DatePicker,
 };
