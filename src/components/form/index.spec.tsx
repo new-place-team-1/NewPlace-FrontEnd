@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import { ThemeProvider } from "@mui/material/styles";
 
 import CustomForm from ".";
-import Field from "src/components/formik/field";
+import Field from "src/components/form/field";
 import { Button } from "src/components/MUI";
 import theme from "src/utils/contexts/Theme";
 

@@ -1,7 +1,7 @@
 import { useField, useFormikContext } from "formik";
 
 import { TextField } from "src/components/MUI";
-import StyledErrorMessage from "src/components/formik/shared/ErrorMessage.styled";
+import StyledErrorMessage from "src/components/form/shared/ErrorMessage.styled";
 
 function Field(props: any) {
   const [field, meta] = useField(props);

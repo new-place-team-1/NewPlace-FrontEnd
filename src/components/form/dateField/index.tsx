@@ -3,7 +3,7 @@ import { useField, useFormikContext } from "formik";
 import dayjs from "dayjs";
 
 import { DatePicker, TextField } from "src/components/MUI";
-import StyledErrorMessage from "src/components/formik/shared/ErrorMessage.styled";
+import StyledErrorMessage from "src/components/form/shared/ErrorMessage.styled";
 
 interface IProps {
   label: string;
