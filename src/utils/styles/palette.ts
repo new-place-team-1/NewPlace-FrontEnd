@@ -2,8 +2,8 @@ const palette = {
   primaryColor: "#F73F52",
   font: {
     main: "#222222",
-    light: "#6C6C6C",
-    lightUp: "898989",
+    light: "898989",
+    label: "#6C6C6C",
     placeholder: "rgba(136, 136, 136, 0.8)",
     lightRed: "#807B7B",
     darkRed: "#5E5757",
