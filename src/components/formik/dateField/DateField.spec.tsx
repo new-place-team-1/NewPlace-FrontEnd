@@ -17,7 +17,7 @@ describe("DateField", () => {
       textFieldProps: {
         color: "secondary",
         variant: "standard",
-        name: "start-date",
+        name: "startDate",
       },
       InputProps: {
         endAdornment: (

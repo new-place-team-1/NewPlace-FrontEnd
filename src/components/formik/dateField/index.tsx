@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useField, useFormikContext } from "formik";
+import dayjs from "dayjs";
 
 import { DatePicker, TextField } from "src/components/MUI";
 import StyledErrorMessage from "src/components/formik/shared/ErrorMessage.styled";
@@ -13,7 +14,7 @@ interface IProps {
 
 function DateField({ label, inputFormat, InputProps, textFieldProps }: IProps) {
   const [field, meta] = useField(textFieldProps);
-  const { isSubmitting } = useFormikContext();
+  const { isSubmitting, setFieldValue } = useFormikContext();
   const [value, setValue] = useState<Date | null>(null);
 
   return (
@@ -23,8 +24,11 @@ function DateField({ label, inputFormat, InputProps, textFieldProps }: IProps) {
         value={value}
         onChange={newValue => {
           setValue(newValue);
+          setFieldValue(field.name, dayjs(newValue).format(inputFormat));
         }}
-        renderInput={params => <TextField {...field} {...params} {...textFieldProps} disabled={isSubmitting} />}
+        renderInput={params => (
+          <TextField {...field} {...params} {...textFieldProps} type="date" disabled={isSubmitting} />
+        )}
         inputFormat={inputFormat}
         InputProps={InputProps}
       />
