@@ -5,13 +5,14 @@ interface IProps {
   onClose: () => void;
   size: "small" | "big";
   children: React.ReactElement;
+  id?: string;
 }
 
-function CustomModal({ open, onClose, size, children }: IProps) {
+function CustomModal({ open, onClose, size, children, id }: IProps) {
   const paperWidth = size === "small" ? 280 : size === "big" ? 800 : 0;
 
   return (
-    <Modal open={open} onClose={onClose}>
+    <Modal id={id} open={open} onClose={onClose}>
       <Paper
         elevation={2}
         sx={{
