@@ -5,7 +5,7 @@ const palette = {
     light: "898989",
     label: "#6C6C6C",
     placeholder: "rgba(136, 136, 136, 0.8)",
-    lightRed: "#807B7B",
+    lightRed: "rgb(128, 123, 123)",
     darkRed: "#5E5757",
   },
   background: {
@@ -17,6 +17,7 @@ const palette = {
   },
   focus: "#FF95A0",
   selected: "#E12D2D",
+  layoutShadow: "rgba(128, 123, 123, 0.25)",
   shadow: "#FFC3C3",
   star: "#FED600",
 };

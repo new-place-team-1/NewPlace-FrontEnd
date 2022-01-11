@@ -6,5 +6,6 @@ import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import SupportAgent from "@mui/icons-material/SupportAgent";
 import People from "@mui/icons-material/People";
 import Login from "@mui/icons-material/Login";
+import ArrowBack from "@mui/icons-material/ArrowBack";
 
-export { AccountCircle, EmojiPeople, DateRange, Search, FavoriteBorder, SupportAgent, People, Login };
+export { AccountCircle, EmojiPeople, DateRange, Search, FavoriteBorder, SupportAgent, People, Login, ArrowBack };

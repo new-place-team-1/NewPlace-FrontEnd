@@ -20,6 +20,19 @@ const theme = createTheme({
       light: palette.shadow, // shadow
     },
   },
+  components: {
+    MuiButton: {
+      variants: [
+        {
+          props: { variant: "outlined", size: "large" },
+          style: {
+            borderRadius: 12,
+            fontSize: 18,
+          },
+        },
+      ],
+    },
+  },
 });
 
 export default theme;
