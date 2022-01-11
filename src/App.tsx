@@ -3,7 +3,7 @@ import AdapterDayjs from "@mui/lab/AdapterDayjs";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 
 import theme from "src/utils/contexts/Theme";
-import Header from "src/components/layout/Header";
+import Header from "src/components/layout/header";
 
 function App() {
   return (
