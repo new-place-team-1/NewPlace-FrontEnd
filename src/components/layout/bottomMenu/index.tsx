@@ -8,6 +8,7 @@ function BottomMenu() {
         showLabels
         onChange={(event, newValue) => {
           console.log(newValue);
+          // TODO: 각 메뉴에따라 history.push 혹은 모달 open
         }}
       >
         {/* TODO: 로그인 상태에 따라 다른 메뉴들 */}

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 
-import { Popper, Grow, Paper, MenuItem, MenuList } from "src/components/MUI";
-import { ClickAwayListener, SvgIcon } from "src/components/MUI/api";
+import { Popper, Paper, MenuItem, MenuList } from "src/components/MUI";
+import { ClickAwayListener, SvgIcon, Grow } from "src/components/MUI/api";
 
 type MenuItem = {
   label: React.ReactNode;

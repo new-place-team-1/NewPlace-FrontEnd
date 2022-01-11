@@ -1,7 +1,7 @@
 import { mount } from "@cypress/react";
+import { ThemeProvider } from "@mui/material/styles";
 
 import DropDownMenu from ".";
-import { ThemeProvider } from "@mui/material/styles";
 import { AccountCircle } from "src/components/MUI/icons";
 import theme from "src/utils/contexts/Theme";
 

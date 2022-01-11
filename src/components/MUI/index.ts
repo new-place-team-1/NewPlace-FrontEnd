@@ -1,7 +1,6 @@
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Popper from "@mui/material/Popper";
-import Grow from "@mui/material/Grow";
 import Paper from "@mui/material/Paper";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
@@ -18,7 +17,6 @@ export {
   Button,
   TextField,
   Popper,
-  Grow,
   Paper,
   MenuItem,
   MenuList,
