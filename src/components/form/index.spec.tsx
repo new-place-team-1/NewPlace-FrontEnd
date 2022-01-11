@@ -71,7 +71,7 @@ describe("CustomForm", () => {
     cy.get("form input[name='nickname']").type(typedNickname).should("have.value", typedNickname);
     cy.get("form input[name='password']").type(typedPassword).should("have.value", typedPassword);
     cy.get("form button").click();
-    cy.get("@handleSubmit").should("have.been.calledOnce");
+    cy.get("@handleSubmit").should("have.been.calledOnceWith", { nickname: typedNickname, password: typedPassword });
   });
 
   it("When type proper nickname and password and keypress enter, Then call handleSubmit", function () {
@@ -80,7 +80,7 @@ describe("CustomForm", () => {
 
     cy.get("form input[name='nickname']").type(typedNickname);
     cy.get("form input[name='password']").type(typedPassword).type("{enter}");
-    cy.get("@handleSubmit").should("have.been.calledOnce");
+    cy.get("@handleSubmit").should("have.been.calledOnceWith", { nickname: typedNickname, password: typedPassword });
   });
 
   it("Given empty all field, When submit, Then not pass validation", function () {
