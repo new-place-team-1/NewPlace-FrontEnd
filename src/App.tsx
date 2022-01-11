@@ -5,8 +5,8 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 
 import { sizeBoundary } from "src/config/device";
 import theme from "src/utils/contexts/Theme";
-import Header from "src/components/layout/header";
-import BottomMenu from "src/components/layout/bottomMenu";
+import Header from "src/layout/header";
+import BottomMenu from "src/layout/bottomMenu";
 
 function App() {
   const isDesktopsize = useMediaQuery({
