@@ -1,10 +1,11 @@
 import { mount } from "@cypress/react";
 
 import App from "./App";
+import { viewportSizeForTest } from "src/config/device";
 
 describe("App", () => {
   it("When viewport width <= 992, Then render MobileHeader", () => {
-    cy.viewport(320, 768);
+    cy.viewport(viewportSizeForTest.mobile.width, viewportSizeForTest.mobile.height);
 
     mount(<App />);
 
@@ -12,7 +13,7 @@ describe("App", () => {
   });
 
   it("When viewport width > 992, Then render DesktopHeader", () => {
-    cy.viewport(1024, 768);
+    cy.viewport(viewportSizeForTest.desktop.width, viewportSizeForTest.desktop.height);
 
     mount(<App />);
 

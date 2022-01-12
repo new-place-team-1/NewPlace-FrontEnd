@@ -2,11 +2,12 @@ import { mount } from "@cypress/react";
 import { ThemeProvider } from "@mui/material/styles";
 
 import Header from ".";
+import { viewportSizeForTest } from "src/config/device";
 import theme from "src/utils/contexts/Theme";
 
 describe("Header", () => {
   it("When viewport width <= 992, Then render MobileHeader", () => {
-    cy.viewport(320, 768);
+    cy.viewport(viewportSizeForTest.mobile.width, viewportSizeForTest.mobile.height);
 
     mount(
       <ThemeProvider theme={theme}>
@@ -18,7 +19,7 @@ describe("Header", () => {
   });
 
   it("When viewport width > 992, Then render DesktopHeader", () => {
-    cy.viewport(1024, 768);
+    cy.viewport(viewportSizeForTest.mobile.width, viewportSizeForTest.mobile.height);
 
     mount(
       <ThemeProvider theme={theme}>
