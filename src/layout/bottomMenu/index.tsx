@@ -1,7 +1,11 @@
 import { BottomNavigation, BottomNavigationAction, Paper } from "src/components/MUI";
 import { SupportAgent, People, Login } from "src/components/MUI/icons";
 
-function BottomMenu() {
+interface IProps {
+  handleSignUpFormOpen: () => void;
+}
+
+function BottomMenu({ handleSignUpFormOpen }: IProps) {
   return (
     <Paper id="bottom-menu" sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }} elevation={3}>
       <BottomNavigation
@@ -9,6 +13,9 @@ function BottomMenu() {
         onChange={(event, newValue) => {
           console.log(newValue);
           // TODO: 각 메뉴에따라 history.push 혹은 모달 open
+          if (newValue === 1) {
+            handleSignUpFormOpen();
+          }
         }}
       >
         {/* TODO: 로그인 상태에 따라 다른 메뉴들 */}

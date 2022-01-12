@@ -19,30 +19,42 @@ function MobileHeader() {
   );
 }
 
-function DesktopHeader() {
+interface IPropsOfDesktopHeader {
+  handleSignUpFormOpen: () => void;
+}
+
+function DesktopHeader({ handleSignUpFormOpen }: IPropsOfDesktopHeader) {
   return (
     <StyledDesktopHeader id="desktop-header">
       <Logo width={180} height={42} />
       <div className="header-right-container">
         {/* TODO: 로그인 여부에 따라 링크, 아이콘들 */}
-        <div>고객센터</div>
-        <div>회원가입</div>
-        <div>
-          <Button variant="outlined" size="large">
-            로그인
-          </Button>
-        </div>
+        <Button color="secondary">고객센터</Button>
+        <Button color="secondary" onClick={handleSignUpFormOpen}>
+          회원가입
+        </Button>
+        <Button variant="outlined" size="large">
+          로그인
+        </Button>
       </div>
     </StyledDesktopHeader>
   );
 }
 
-function Header() {
+interface IProps {
+  handleSignUpFormOpen: () => void;
+}
+
+function Header({ handleSignUpFormOpen }: IProps) {
   const isDesktopsize = useMediaQuery({
     query: `(min-width: ${sizeBoundary}px)`,
   });
 
-  return <Fragment>{isDesktopsize ? <DesktopHeader /> : <MobileHeader />}</Fragment>;
+  return (
+    <Fragment>
+      {isDesktopsize ? <DesktopHeader handleSignUpFormOpen={handleSignUpFormOpen} /> : <MobileHeader />}
+    </Fragment>
+  );
 }
 
 export default Header;

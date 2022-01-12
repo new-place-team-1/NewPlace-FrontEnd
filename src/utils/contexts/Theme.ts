@@ -40,6 +40,12 @@ const theme = createTheme({
             fontSize: 18,
           },
         },
+        {
+          props: { size: "medium", color: "secondary" },
+          style: {
+            fontSize: 18,
+          },
+        },
       ],
     },
   },

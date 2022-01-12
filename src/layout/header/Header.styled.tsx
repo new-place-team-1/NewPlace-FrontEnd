@@ -32,10 +32,10 @@ export const StyledDesktopHeader = styled.header`
     align-items: center;
     justify-content: space-between;
 
-    div {
+    button {
       margin: 20px;
     }
-    div:last-child {
+    button:last-child {
       margin-right: 0;
     }
   }
