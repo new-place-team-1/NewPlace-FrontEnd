@@ -29,6 +29,11 @@ describe("SignInForm", () => {
 
   it("Given open=true, Then render SignInForm", function () {
     cy.get("#sign-in-form");
+
+    cy.contains("로그인");
+    cy.get("input[name='email']");
+    cy.get("input[name='password']");
+    cy.get("button").contains("계속");
   });
 
   it("When click outside, Then call onClose", function () {

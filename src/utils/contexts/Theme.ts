@@ -24,6 +24,7 @@ const theme = createTheme({
     h2: {
       fontSize: 18,
       textAlign: "center",
+      fontWeight: "bold",
     },
     caption: {
       fontSize: 12,
