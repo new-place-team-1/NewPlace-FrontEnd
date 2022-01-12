@@ -33,12 +33,14 @@
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "cy:open": "cypress open",
+    "cy:run": "cypress run --browser chrome",
     "cy:open-ct": "cypress open-ct",
     "cy:run-ct": "cypress run-ct",
     "test:unit:open": "yarn cy:open-ct",
     "test:unit:run": "yarn cy:run-ct",
-    "test:unit": "yarn test:unit:run && yarn test:unit:open",
     "test:open": "yarn cy:open",
+    "test:run": "yarn cy:run",
+    "test": "yarn test:unit:run && yarn test:run",
     "husky:install": "husky install ./src/config/husky"
   },
   "eslintConfig": {
