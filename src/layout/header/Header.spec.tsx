@@ -19,7 +19,7 @@ describe("Header", () => {
   });
 
   it("When viewport width > 992, Then render DesktopHeader", () => {
-    cy.viewport(viewportSizeForTest.mobile.width, viewportSizeForTest.mobile.height);
+    cy.viewport(viewportSizeForTest.desktop.width, viewportSizeForTest.desktop.height);
 
     mount(
       <ThemeProvider theme={theme}>
