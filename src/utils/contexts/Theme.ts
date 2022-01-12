@@ -20,6 +20,15 @@ const theme = createTheme({
       light: palette.shadow, // shadow
     },
   },
+  typography: {
+    h2: {
+      fontSize: 18,
+      textAlign: "center",
+    },
+    caption: {
+      fontSize: 12,
+    },
+  },
   components: {
     MuiButton: {
       variants: [

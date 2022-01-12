@@ -1,6 +1,6 @@
 import { useField, useFormikContext } from "formik";
 
-import { Checkbox } from "src/components/MUI";
+import { Checkbox, Typography } from "src/components/MUI";
 import StyledErrorMessage from "src/components/form/shared/ErrorMessage.styled";
 
 function CheckboxField(props: any) {
@@ -10,7 +10,9 @@ function CheckboxField(props: any) {
   return (
     <div className="checkbox-field">
       <Checkbox {...field} {...props} disabled={isSubmitting} />
-      <span>{props.value}</span>
+      <Typography variant="caption" component="span">
+        {props.value}
+      </Typography>
       {meta.touched && meta.error && <StyledErrorMessage className="error">{meta.error}</StyledErrorMessage>}
     </div>
   );

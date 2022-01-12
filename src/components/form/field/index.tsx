@@ -8,7 +8,7 @@ function Field(props: any) {
   const { isSubmitting } = useFormikContext();
 
   return (
-    <div className="field">
+    <div className="field" style={{ margin: 8 }}>
       <TextField {...field} {...props} disabled={isSubmitting} />
       {meta.touched && meta.error && <StyledErrorMessage className="error">{meta.error}</StyledErrorMessage>}
     </div>

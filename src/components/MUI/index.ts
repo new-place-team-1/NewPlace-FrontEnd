@@ -10,6 +10,7 @@ import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
 
 import DatePicker from "@mui/lab/DatePicker";
 
@@ -26,5 +27,6 @@ export {
   BottomNavigationAction,
   Tabs,
   Tab,
+  Typography,
   DatePicker,
 };

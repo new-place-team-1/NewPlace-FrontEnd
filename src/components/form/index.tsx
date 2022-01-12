@@ -8,9 +8,10 @@ interface IProps {
   validationSchema?: object;
   handleSubmit: (values: object) => Promise<any>;
   children: React.ReactNode;
+  style?: object;
 }
 
-function CustomForm({ initialValues, validationSchema, handleSubmit, children }: IProps) {
+function CustomForm({ initialValues, validationSchema, handleSubmit, children, style }: IProps) {
   const onSubmit = useCallback(
     (values, actions) => {
       if (isDevelopmentMode()) {
@@ -32,7 +33,7 @@ function CustomForm({ initialValues, validationSchema, handleSubmit, children }:
 
   return (
     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-      <Form>{children}</Form>
+      <Form style={style}>{children}</Form>
     </Formik>
   );
 }

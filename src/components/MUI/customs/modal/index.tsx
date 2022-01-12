@@ -1,9 +1,11 @@
 import { Modal, Paper } from "src/components/MUI";
 
+export type ModalSize = "small" | "big";
+
 interface IProps {
   open: boolean;
   onClose: () => void;
-  size: "small" | "big";
+  size: ModalSize;
   children: React.ReactElement;
   id?: string;
 }
