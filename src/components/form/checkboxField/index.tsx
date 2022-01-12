@@ -9,11 +9,17 @@ function CheckboxField(props: any) {
 
   return (
     <div className="checkbox-field">
-      <Checkbox {...field} {...props} disabled={isSubmitting} />
-      <Typography variant="caption" component="span">
-        {props.value}
-      </Typography>
-      {meta.touched && meta.error && <StyledErrorMessage className="error">{meta.error}</StyledErrorMessage>}
+      <label>
+        <Checkbox {...field} {...props} disabled={isSubmitting} />
+        <Typography variant="caption" component="span">
+          {props.value}
+        </Typography>
+      </label>
+      {meta.touched && meta.error && (
+        <StyledErrorMessage className="error" style={{ marginLeft: 12 }}>
+          {meta.error}
+        </StyledErrorMessage>
+      )}
     </div>
   );
 }

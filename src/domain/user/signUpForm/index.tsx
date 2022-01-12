@@ -2,6 +2,7 @@ import { useCallback } from "react";
 import * as Yup from "yup";
 
 import { StyledBox } from "./SignUpForm.styled";
+import { errorMessage } from "src/config/message";
 import { Typography, Paper, Button, Checkbox } from "src/components/MUI";
 import CustomModal, { ModalSize } from "src/components/MUI/customs/modal";
 import CustomForm from "src/components/form";
@@ -23,33 +24,14 @@ function SignUpForm({ open, onClose, size }: IProps) {
     phoneNumber: "",
     agree: false,
   };
-  const errorMessage = {
-    email: {
-      required: "이메일을 입력해주세요.",
-    },
-    password: {
-      required: "비밀번호를 입력해주세요.",
-    },
-    passwordConfirm: {
-      required: "비밀번호를 확인해주세요.",
-    },
-    userName: {
-      required: "이름을 입력해주세요.",
-    },
-    phoneNumber: {
-      required: "휴대폰 번호를 입력해주세요.",
-    },
-    agree: {
-      required: "약관에 동의가 필요합니다.",
-    },
-  };
+
   const validationSchema = Yup.object({
     email: Yup.string().required(errorMessage.email.required),
     password: Yup.string().required(errorMessage.password.required),
     passwordConfirm: Yup.string().required(errorMessage.passwordConfirm.required),
     userName: Yup.string().required(errorMessage.userName.required),
     phoneNumber: Yup.string().required(errorMessage.phoneNumber.required),
-    agree: Yup.string().required(errorMessage.agree.required),
+    agree: Yup.boolean().oneOf([true], errorMessage.agree.required),
   });
 
   const handleSubmit = useCallback(values => {
