@@ -1,13 +1,13 @@
 import { mount } from "@cypress/react";
 
-import App from "./App";
+import Layout from ".";
 import { viewportSizeForTest } from "src/config/device";
 
-describe("App", () => {
+describe("Layout", () => {
   it("When viewport width <= 992, Then render MobileHeader", () => {
     cy.viewport(viewportSizeForTest.mobile.width, viewportSizeForTest.mobile.height);
 
-    mount(<App />);
+    mount(<Layout />);
 
     cy.get("#bottom-menu");
   });
@@ -15,7 +15,7 @@ describe("App", () => {
   it("When viewport width > 992, Then render DesktopHeader", () => {
     cy.viewport(viewportSizeForTest.desktop.width, viewportSizeForTest.desktop.height);
 
-    mount(<App />);
+    mount(<Layout />);
 
     cy.get("#bottom-menu").should("not.exist");
   });
