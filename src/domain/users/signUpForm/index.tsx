@@ -16,11 +16,12 @@ import CheckboxField from "src/components/form/checkboxField";
 interface IProps {
   open: boolean;
   handleClose: () => void;
-  handleOpenSignInModal: () => void;
+  handleSignInFormOpen: () => void;
+  handleSnackbarOpen: (message: string) => void;
   size: ModalSize;
 }
 
-function SignUpForm({ open, handleClose, handleOpenSignInModal, size }: IProps) {
+function SignUpForm({ open, handleClose, handleSignInFormOpen, handleSnackbarOpen, size }: IProps) {
   const [agreeContact, setAgreeContact] = useState<boolean>(false);
   const [agreePolicy, setAgreePolicy] = useState<boolean>(false);
   const initialValues: ISignUpFormValues = useMemo(() => {
@@ -54,8 +55,9 @@ function SignUpForm({ open, handleClose, handleOpenSignInModal, size }: IProps) 
     (values: ISignUpFormValues, actions) =>
       signUp(omit(values, ["agree", "agreeContact", "agreePolicy"]))
         .then(() => {
-          handleOpenSignInModal();
+          handleSignInFormOpen();
           handleClose();
+          handleSnackbarOpen(alertMessage.signUp.success.title);
         })
         .catch(() => {
           actions.resetForm({
@@ -63,11 +65,11 @@ function SignUpForm({ open, handleClose, handleOpenSignInModal, size }: IProps) 
           });
           Swal.fire({
             icon: "error",
-            title: alertMessage.error.signUpFailed.title,
-            text: alertMessage.error.signUpFailed.text,
+            title: alertMessage.signUp.error.title,
+            text: alertMessage.signUp.error.text,
           });
         }),
-    [handleClose, handleOpenSignInModal, initialValues],
+    [handleClose, handleSignInFormOpen, handleSnackbarOpen, initialValues],
   );
 
   const handleAgreeContactChange = useCallback((event, values: ISignUpFormValues, setValues) => {
