@@ -65,13 +65,14 @@ describe("CustomForm", () => {
     mount(<TestComponent {...this.props} />);
   });
 
-  it("When type proper nickname and password and click submit button, Then call handleSubmit", function () {
+  it("When type proper nickname and password and click submit button, Then show Spinner call handleSubmit", function () {
     const typedNickname = "cypress";
     const typedPassword = "123456";
 
     cy.get("form input[name='nickname']").type(typedNickname).should("have.value", typedNickname);
     cy.get("form input[name='password']").type(typedPassword).should("have.value", typedPassword);
     cy.get("form button").click();
+    cy.get(".MuiCircularProgress-root");
     cy.get("@handleSubmit").should("have.been.calledOnceWith", { nickname: typedNickname, password: typedPassword });
   });
 

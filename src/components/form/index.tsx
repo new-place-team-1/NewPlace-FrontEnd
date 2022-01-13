@@ -2,11 +2,12 @@ import { Formik, Form } from "formik";
 import { useCallback } from "react";
 
 import { isDevelopmentMode } from "src/utils/lib/is";
+import Spinner from "src/components/MUI/customs/spinner";
 
 interface IProps {
   initialValues: object;
   validationSchema?: object;
-  handleSubmit: (values: object) => Promise<any>;
+  handleSubmit: (values: IFormValues) => any;
   children: React.ReactNode;
   style?: object;
 }
@@ -33,7 +34,14 @@ function CustomForm({ initialValues, validationSchema, handleSubmit, children, s
 
   return (
     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-      <Form style={style}>{children}</Form>
+      {({ isSubmitting }) => {
+        return (
+          <Form style={style}>
+            {isSubmitting && <Spinner />}
+            {children}
+          </Form>
+        );
+      }}
     </Formik>
   );
 }
