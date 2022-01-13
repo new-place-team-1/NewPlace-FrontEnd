@@ -1,9 +1,10 @@
 import { useState, useCallback, useMemo } from "react";
 import * as Yup from "yup";
 import { omit } from "lodash";
+import Swal from "sweetalert2";
 
 import { StyledBox } from "./SignUpForm.styled";
-import { errorMessage } from "src/config/message";
+import { errorMessage, alertMessage } from "src/config/message";
 import regExp from "src/config/regExp";
 import { signUp } from "src/services/users";
 import { Typography, Paper, Button } from "src/components/MUI";
@@ -59,6 +60,11 @@ function SignUpForm({ open, handleClose, handleOpenSignInModal, size }: IProps) 
         .catch(() => {
           actions.resetForm({
             values: initialValues,
+          });
+          Swal.fire({
+            icon: "error",
+            title: alertMessage.error.signUpFailed.title,
+            text: alertMessage.error.signUpFailed.text,
           });
         }),
     [handleClose, handleOpenSignInModal, initialValues],

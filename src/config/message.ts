@@ -23,3 +23,12 @@ export const errorMessage = {
     required: "약관에 동의가 필요합니다.",
   },
 };
+
+export const alertMessage = {
+  error: {
+    signUpFailed: {
+      title: "회원가입 실패",
+      text: "회원가입에 실패했습니다. 다시 요청해주세요.",
+    },
+  },
+};
