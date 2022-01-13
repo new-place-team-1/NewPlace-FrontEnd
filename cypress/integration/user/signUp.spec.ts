@@ -75,10 +75,19 @@ describe("sign up", () => {
 
     describe("validation", () => {
       beforeEach(() => {
+        cy.intercept("POST", USER.INDEX, req => {
+          req.reply({
+            statusCode: 201,
+            body: {
+              data: "OK",
+            },
+          });
+        }).as("api");
+
         cy.contains("회원가입").click();
       });
 
-      it("Given open modal and empty fields, When click submit button, Then show validation error message and not call submit", () => {
+      it("Given empty fields, When click submit button, Then show validation error message and not call submit", () => {
         cy.contains("계속").click();
 
         cy.contains(errorMessage.email.required);
@@ -87,9 +96,10 @@ describe("sign up", () => {
         cy.contains(errorMessage.name.required);
         cy.contains(errorMessage.phoneNumber.required);
         cy.contains(errorMessage.agree.required);
+        cy.get("@api").should("eq", null);
       });
 
-      it.only("Given open modal and empty fields, When click submit button, Then show validation error message and not call submit", () => {
+      it("When type invalid values and click submit button, Then show validation error message and not call submit", () => {
         const invalidTypedValue = {
           email: "abcdef",
           password: "123456",
@@ -110,6 +120,7 @@ describe("sign up", () => {
         cy.contains(errorMessage.passwordConfirm.match);
         cy.contains(errorMessage.name.match);
         cy.contains(errorMessage.phoneNumber.match);
+        cy.get("@api").should("eq", null);
       });
     });
   });

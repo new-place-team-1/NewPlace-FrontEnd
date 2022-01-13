@@ -1,1 +1,3 @@
-export const USER = {};
+export const USER = {
+  INDEX: "/members",
+};
