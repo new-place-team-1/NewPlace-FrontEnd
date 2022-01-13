@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import * as Yup from "yup";
 import { omit } from "lodash";
 
@@ -22,14 +22,46 @@ interface IProps {
 function SignUpForm({ open, handleClose, handleOpenSignInModal, size }: IProps) {
   const [agreeContact, setAgreeContact] = useState<boolean>(false);
   const [agreePolicy, setAgreePolicy] = useState<boolean>(false);
+  const initialValues: ISignUpFormValues = useMemo(() => {
+    return {
+      email: "",
+      password: "",
+      passwordConfirm: "",
+      name: "",
+      phoneNumber: "",
+      agree: false,
+      agreeContact: false,
+      agreePolicy: false,
+    };
+  }, []);
+  const validationSchema = Yup.object({
+    email: Yup.string().required(errorMessage.email.required).matches(regExp.email, errorMessage.email.match),
+    password: Yup.string()
+      .required(errorMessage.password.required)
+      .matches(regExp.password, errorMessage.password.match),
+    passwordConfirm: Yup.string()
+      .required(errorMessage.passwordConfirm.required)
+      .oneOf([Yup.ref("password")], errorMessage.passwordConfirm.match),
+    name: Yup.string().required(errorMessage.name.required).matches(regExp.userName, errorMessage.name.match),
+    phoneNumber: Yup.string()
+      .required(errorMessage.phoneNumber.required)
+      .matches(regExp.phoneNumber, errorMessage.phoneNumber.match),
+    agree: Yup.boolean().oneOf([true], errorMessage.agree.required),
+  });
 
   const handleSubmit = useCallback(
-    (values: ISignUpFormValues) =>
-      signUp(omit(values, ["agree", "agreeContact", "agreePolicy"])).then(() => {
-        handleOpenSignInModal();
-        handleClose();
-      }),
-    [handleClose, handleOpenSignInModal],
+    (values: ISignUpFormValues, actions) =>
+      signUp(omit(values, ["agree", "agreeContact", "agreePolicy"]))
+        .then(() => {
+          handleOpenSignInModal();
+          handleClose();
+        })
+        .catch(() => {
+          actions.resetForm({
+            values: initialValues,
+          });
+        }),
+    [handleClose, handleOpenSignInModal, initialValues],
   );
 
   const handleAgreeContactChange = useCallback((event, values: ISignUpFormValues, setValues) => {
@@ -66,31 +98,6 @@ function SignUpForm({ open, handleClose, handleOpenSignInModal, size }: IProps) 
     setAgreeContact(checked);
     setAgreePolicy(checked);
   }, []);
-
-  const initialValues: ISignUpFormValues = {
-    email: "",
-    password: "",
-    passwordConfirm: "",
-    name: "",
-    phoneNumber: "",
-    agree: false,
-    agreeContact: false,
-    agreePolicy: false,
-  };
-  const validationSchema = Yup.object({
-    email: Yup.string().required(errorMessage.email.required).matches(regExp.email, errorMessage.email.match),
-    password: Yup.string()
-      .required(errorMessage.password.required)
-      .matches(regExp.password, errorMessage.password.match),
-    passwordConfirm: Yup.string()
-      .required(errorMessage.passwordConfirm.required)
-      .oneOf([Yup.ref("password")], errorMessage.passwordConfirm.match),
-    name: Yup.string().required(errorMessage.name.required).matches(regExp.userName, errorMessage.name.match),
-    phoneNumber: Yup.string()
-      .required(errorMessage.phoneNumber.required)
-      .matches(regExp.phoneNumber, errorMessage.phoneNumber.match),
-    agree: Yup.boolean().oneOf([true], errorMessage.agree.required),
-  });
 
   return (
     <CustomModal id="sign-up-form" open={open} onClose={handleClose} size={size}>

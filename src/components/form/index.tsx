@@ -7,7 +7,7 @@ import Spinner from "src/components/MUI/customs/spinner";
 interface IProps {
   initialValues: object;
   validationSchema?: object;
-  handleSubmit: (values: IFormValues) => any;
+  handleSubmit: (values: IFormValues, actions: any) => any;
   children: React.ReactNode;
   style?: object;
 }
@@ -19,7 +19,7 @@ function CustomForm({ initialValues, validationSchema, handleSubmit, children, s
         console.log("[CustomForm] values on submit: ", values);
       }
 
-      handleSubmit(values)
+      handleSubmit(values, actions)
         .then(() => {
           actions.resetForm({
             values: initialValues,

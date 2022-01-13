@@ -75,7 +75,7 @@ describe("sign up", () => {
 
     describe("validation", () => {
       beforeEach(() => {
-        cy.intercept("POST", USERS.INDEX, req => {
+        cy.intercept("post", USERS.INDEX, req => {
           req.reply({
             statusCode: 201,
             body: {
@@ -125,8 +125,16 @@ describe("sign up", () => {
     });
 
     describe("submit", () => {
-      beforeEach(() => {
-        cy.intercept("POST", USERS.INDEX, req => {
+      it("When type proper values and click submit button, Then not show validation error message and submit successfully and change modal with LogInForm Modal", () => {
+        const validTypedValue = {
+          email: "abcd@gmail.com",
+          password: "1234abcd!",
+          passwordConfirm: "1234abcd!",
+          name: "가나다라마",
+          phoneNumber: "01012345678",
+        };
+
+        cy.intercept("post", USERS.INDEX, req => {
           req.reply({
             statusCode: 201,
             body: {
@@ -137,17 +145,6 @@ describe("sign up", () => {
         }).as("api");
 
         cy.contains("회원가입").click();
-      });
-
-      it("When type proper values and click submit button, Then not show validation error message and submit successfully and change modal with LogInForm Modal", () => {
-        const validTypedValue = {
-          email: "abcd@gmail.com",
-          password: "1234abcd!",
-          passwordConfirm: "1234abcd!",
-          name: "가나다라마",
-          phoneNumber: "01012345678",
-        };
-
         cy.contains("이메일").closest(".field").find("input").type(validTypedValue.email);
         cy.contains("비밀번호").closest(".field").find("input").type(validTypedValue.password);
         cy.contains("비밀번호 확인").closest(".field").find("input").type(validTypedValue.passwordConfirm);
