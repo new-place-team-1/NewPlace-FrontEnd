@@ -3,6 +3,7 @@ import * as Yup from "yup";
 
 import { StyledBox } from "./SignUpForm.styled";
 import { errorMessage } from "src/config/message";
+import regExp from "src/config/regExp";
 import { Typography, Paper, Button } from "src/components/MUI";
 import CustomModal, { ModalSize } from "src/components/MUI/customs/modal";
 import CustomForm from "src/components/form";
@@ -69,11 +70,17 @@ function SignUpForm({ open, onClose, size }: IProps) {
     agreePolicy: false,
   };
   const validationSchema = Yup.object({
-    email: Yup.string().required(errorMessage.email.required),
-    password: Yup.string().required(errorMessage.password.required),
-    passwordConfirm: Yup.string().required(errorMessage.passwordConfirm.required),
-    name: Yup.string().required(errorMessage.name.required),
-    phoneNumber: Yup.string().required(errorMessage.phoneNumber.required),
+    email: Yup.string().required(errorMessage.email.required).matches(regExp.email, errorMessage.email.match),
+    password: Yup.string()
+      .required(errorMessage.password.required)
+      .matches(regExp.password, errorMessage.password.match),
+    passwordConfirm: Yup.string()
+      .required(errorMessage.passwordConfirm.required)
+      .oneOf([Yup.ref("password")], errorMessage.passwordConfirm.match),
+    name: Yup.string().required(errorMessage.name.required).matches(regExp.userName, errorMessage.name.match),
+    phoneNumber: Yup.string()
+      .required(errorMessage.phoneNumber.required)
+      .matches(regExp.phoneNumber, errorMessage.phoneNumber.match),
     agree: Yup.boolean().oneOf([true], errorMessage.agree.required),
   });
 
