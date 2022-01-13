@@ -9,7 +9,7 @@ describe("SignUpForm", () => {
     cy.viewport(300, 700);
     this.props = {
       open: true,
-      onClose: cy.stub().as("onClose"),
+      handleClose: cy.stub().as("handleClose"),
       size: "small",
     };
     mount(
@@ -44,8 +44,8 @@ describe("SignUpForm", () => {
     cy.get("button").contains("계속");
   });
 
-  it("When click outside, Then call onClose", function () {
+  it("When click outside, Then call handleClose", function () {
     cy.get("#sign-up-form").click(1, 1);
-    cy.get("@onClose").should("have.been.calledOnce");
+    cy.get("@handleClose").should("have.been.calledOnce");
   });
 });

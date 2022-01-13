@@ -1,9 +1,11 @@
 import { useState, useCallback } from "react";
 import * as Yup from "yup";
+import { omit } from "lodash";
 
 import { StyledBox } from "./SignUpForm.styled";
 import { errorMessage } from "src/config/message";
 import regExp from "src/config/regExp";
+import { signUp } from "src/services/users";
 import { Typography, Paper, Button } from "src/components/MUI";
 import CustomModal, { ModalSize } from "src/components/MUI/customs/modal";
 import CustomForm from "src/components/form";
@@ -12,19 +14,25 @@ import CheckboxField from "src/components/form/checkboxField";
 
 interface IProps {
   open: boolean;
-  onClose: () => void;
+  handleClose: () => void;
+  handleOpenSignInModal: () => void;
   size: ModalSize;
 }
 
-function SignUpForm({ open, onClose, size }: IProps) {
+function SignUpForm({ open, handleClose, handleOpenSignInModal, size }: IProps) {
   const [agreeContact, setAgreeContact] = useState<boolean>(false);
   const [agreePolicy, setAgreePolicy] = useState<boolean>(false);
 
-  const handleSubmit = useCallback(values => {
-    return new Promise(resolve => resolve(values));
-  }, []);
+  const handleSubmit = useCallback(
+    (values: ISignUpFormValues) =>
+      signUp(omit(values, ["agree", "agreeContact", "agreePolicy"])).then(() => {
+        handleOpenSignInModal();
+        handleClose();
+      }),
+    [handleClose, handleOpenSignInModal],
+  );
 
-  const handleAgreeContactChange = useCallback((event, values, setValues) => {
+  const handleAgreeContactChange = useCallback((event, values: ISignUpFormValues, setValues) => {
     const checked = event.target.checked;
 
     setValues({
@@ -35,7 +43,7 @@ function SignUpForm({ open, onClose, size }: IProps) {
     setAgreeContact(event.target.checked);
   }, []);
 
-  const handleAgreePolicyChange = useCallback((event, values, setValues) => {
+  const handleAgreePolicyChange = useCallback((event, values: ISignUpFormValues, setValues) => {
     const checked = event.target.checked;
 
     setValues({
@@ -46,7 +54,7 @@ function SignUpForm({ open, onClose, size }: IProps) {
     setAgreePolicy(event.target.checked);
   }, []);
 
-  const handleAgreeAllChange = useCallback((event, values, setValues) => {
+  const handleAgreeAllChange = useCallback((event, values: ISignUpFormValues, setValues) => {
     const checked = event.target.checked;
 
     setValues({
@@ -59,7 +67,7 @@ function SignUpForm({ open, onClose, size }: IProps) {
     setAgreePolicy(checked);
   }, []);
 
-  const initialValues = {
+  const initialValues: ISignUpFormValues = {
     email: "",
     password: "",
     passwordConfirm: "",
@@ -85,7 +93,7 @@ function SignUpForm({ open, onClose, size }: IProps) {
   });
 
   return (
-    <CustomModal id="sign-up-form" open={open} onClose={onClose} size={size}>
+    <CustomModal id="sign-up-form" open={open} onClose={handleClose} size={size}>
       <Paper elevation={2} sx={{ padding: 2 }}>
         <CustomForm
           initialValues={initialValues}

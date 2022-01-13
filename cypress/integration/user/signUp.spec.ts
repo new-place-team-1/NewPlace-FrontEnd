@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { USER } from "src/config/endpoint";
+import { USERS } from "src/config/endpoint";
 import { viewportSizeForTest } from "src/config/device";
 import { errorMessage } from "src/config/message";
 
@@ -75,7 +75,7 @@ describe("sign up", () => {
 
     describe("validation", () => {
       beforeEach(() => {
-        cy.intercept("POST", USER.INDEX, req => {
+        cy.intercept("POST", USERS.INDEX, req => {
           req.reply({
             statusCode: 201,
             body: {
@@ -121,6 +121,51 @@ describe("sign up", () => {
         cy.contains(errorMessage.name.match);
         cy.contains(errorMessage.phoneNumber.match);
         cy.get("@api").should("eq", null);
+      });
+    });
+
+    describe("submit", () => {
+      beforeEach(() => {
+        cy.intercept("POST", USERS.INDEX, req => {
+          req.reply({
+            statusCode: 201,
+            body: {
+              data: "OK",
+            },
+            delay: 1000,
+          });
+        }).as("api");
+
+        cy.contains("회원가입").click();
+      });
+
+      it("When type proper values and click submit button, Then not show validation error message and submit successfully and change modal with LogInForm Modal", () => {
+        const validTypedValue = {
+          email: "abcd@gmail.com",
+          password: "1234abcd!",
+          passwordConfirm: "1234abcd!",
+          name: "가나다라마",
+          phoneNumber: "01012345678",
+        };
+
+        cy.contains("이메일").closest(".field").find("input").type(validTypedValue.email);
+        cy.contains("비밀번호").closest(".field").find("input").type(validTypedValue.password);
+        cy.contains("비밀번호 확인").closest(".field").find("input").type(validTypedValue.passwordConfirm);
+        cy.contains("이름").closest(".field").find("input").type(validTypedValue.name);
+        cy.contains("휴대폰 번호").closest(".field").find("input").type(validTypedValue.phoneNumber);
+        cy.contains("전체 약관 동의").click();
+        cy.contains("계속").click();
+
+        cy.get(".error").should("have.length", 0);
+        cy.wait("@api").then(interception => {
+          const {
+            request: { body },
+          } = interception;
+
+          expect(body).to.deep.equal(validTypedValue);
+        });
+        cy.get("#sign-in-form").should("exist");
+        cy.get("#sign-up-form").should("not.exist");
       });
     });
   });

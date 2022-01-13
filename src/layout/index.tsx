@@ -5,9 +5,11 @@ import { sizeBoundary } from "src/config/device";
 import Header from "src/layout/header";
 import BottomMenu from "src/layout/bottomMenu";
 import SignUpForm from "src/domain/user/signUpForm";
+import SignInForm from "src/domain/user/signInForm";
 
 function Layout() {
   const [isOpenSignUpFormModal, setIsOpenSignUpFormModal] = useState<boolean>(false);
+  const [isOpenSignInFormModal, setIsOpenSignInFormModal] = useState<boolean>(false);
   const isDesktopsize = useMediaQuery({
     query: `(min-width: ${sizeBoundary}px)`,
   });
@@ -20,6 +22,14 @@ function Layout() {
     setIsOpenSignUpFormModal(false);
   };
 
+  const handleSignInFormOpen = () => {
+    setIsOpenSignInFormModal(true);
+  };
+
+  const handleSignInFormClose = () => {
+    setIsOpenSignInFormModal(false);
+  };
+
   return (
     <Fragment>
       <Header handleSignUpFormOpen={handleSignUpFormOpen} />
@@ -27,10 +37,13 @@ function Layout() {
       {isOpenSignUpFormModal && (
         <SignUpForm
           open={isOpenSignUpFormModal}
-          onClose={handleSignUpFormClose}
-          size={isDesktopsize ? "big" : "small"}
+          handleClose={handleSignUpFormClose}
+          handleOpenSignInModal={handleSignInFormOpen}
+          size="small"
+          // TODO: 소셜로그인 추가되고 모달창 내용물 많아지면, size={isDesktopsize ? "big" : "small"}
         />
       )}
+      {isOpenSignInFormModal && <SignInForm open={isOpenSignInFormModal} onClose={handleSignInFormClose} />}
     </Fragment>
   );
 }
