@@ -11,6 +11,7 @@ import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import DatePicker from "@mui/lab/DatePicker";
 
@@ -28,5 +29,6 @@ export {
   Tabs,
   Tab,
   Typography,
+  CircularProgress,
   DatePicker,
 };
