@@ -4,8 +4,8 @@ import { useMediaQuery } from "react-responsive";
 import { sizeBoundary } from "src/config/device";
 import Header from "src/layout/header";
 import BottomMenu from "src/layout/bottomMenu";
-import SignUpForm from "src/domain/user/signUpForm";
-import SignInForm from "src/domain/user/signInForm";
+import SignUpForm from "src/domain/users/signUpForm";
+import SignInForm from "src/domain/users/signInForm";
 
 function Layout() {
   const [isOpenSignUpFormModal, setIsOpenSignUpFormModal] = useState<boolean>(false);
