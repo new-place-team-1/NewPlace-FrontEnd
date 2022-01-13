@@ -4,6 +4,7 @@ import { ThemeProvider } from "@mui/material/styles";
 
 import CustomForm from ".";
 import Field from "src/components/form/field";
+import CheckboxField from "src/components/form/checkboxField";
 import { Button } from "src/components/MUI";
 import theme from "src/utils/contexts/Theme";
 
@@ -111,5 +112,52 @@ describe("CustomForm", () => {
     cy.get("form button").click();
     cy.get("@handleSubmit").should("not.have.been.called");
     cy.get("form .error").contains(this.errorMessage.tooLong);
+  });
+});
+
+describe("CustomForm with CheckboxField", () => {
+  interface IProps {
+    initialValues: object;
+    validationSchema?: object;
+    handleSubmit: (values: object) => Promise<any>;
+  }
+
+  function TestComponent({ initialValues, validationSchema, handleSubmit }: IProps) {
+    return (
+      <ThemeProvider theme={theme}>
+        <CustomForm initialValues={initialValues} validationSchema={validationSchema} handleSubmit={handleSubmit}>
+          <CheckboxField name="agree" color="secondary" label="전체 약관 동의" />
+          <Button type="submit">submit</Button>
+        </CustomForm>
+      </ThemeProvider>
+    );
+  }
+
+  beforeEach(function () {
+    this.errorMessage = {
+      required: "Required",
+    };
+    const validationSchema = Yup.object({
+      agree: Yup.boolean().oneOf([true], this.errorMessage.required),
+    });
+    this.props = {
+      initialValues: {
+        agree: false,
+      },
+      validationSchema,
+      handleSubmit: cy.stub().as("handleSubmit"),
+    };
+    mount(<TestComponent {...this.props} />);
+  });
+
+  it("Given CheckboxField checked, When click submit button, Then call onSubmit with proper arguments", function () {
+    cy.get("form input[name='agree']").click();
+    cy.get("form button").click();
+    cy.get("@handleSubmit").should("have.been.calledOnceWith", { agree: true });
+  });
+
+  it("Given CheckboxField not checked, When click submit button, Then not call onSubmit", function () {
+    cy.get("form button").click();
+    cy.get("@handleSubmit").should("not.have.been.called");
   });
 });

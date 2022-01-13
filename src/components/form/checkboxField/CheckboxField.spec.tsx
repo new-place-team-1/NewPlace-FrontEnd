@@ -11,7 +11,7 @@ describe("CheckboxField", () => {
       defaultChecked: false,
       color: "secondary",
       name: "agree",
-      value: "agree",
+      label: "agree",
       size: "small",
     };
 
@@ -26,10 +26,12 @@ describe("CheckboxField", () => {
     );
   });
 
-  it("Given props, Then render MUI-Field with props", function () {
-    cy.get(".checkbox-field input").as("checkbox").should("not.have.attr", "checked", false);
-    cy.get("@checkbox").click().should("not.have.attr", "checked", true);
-    cy.get("@checkbox").type("{enter}");
-    cy.get("@onSubmit").should("have.been.calledOnce");
+  it("Given props, Then render MUI-Field with props", () => {
+    cy.get(".checkbox-field input").should("not.have.attr", "checked", false);
+  });
+
+  it("When click and submit, Then call onSubmit with proper arguments", () => {
+    cy.get(".checkbox-field input").type("{enter}").should("not.have.attr", "checked", true);
+    cy.get("@onSubmit").should("have.been.calledOnceWith", { agree: true });
   });
 });

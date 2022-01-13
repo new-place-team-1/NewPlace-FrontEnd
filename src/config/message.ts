@@ -8,7 +8,7 @@ export const errorMessage = {
   passwordConfirm: {
     required: "비밀번호를 확인해주세요.",
   },
-  userName: {
+  name: {
     required: "이름을 입력해주세요.",
   },
   phoneNumber: {

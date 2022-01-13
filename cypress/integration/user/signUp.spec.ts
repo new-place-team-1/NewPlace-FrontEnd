@@ -38,7 +38,7 @@ describe("sign up", () => {
       cy.contains(errorMessage.email.required);
       cy.contains(errorMessage.password.required);
       cy.contains(errorMessage.passwordConfirm.required);
-      cy.contains(errorMessage.userName.required);
+      cy.contains(errorMessage.name.required);
       cy.contains(errorMessage.phoneNumber.required);
       cy.contains(errorMessage.agree.required);
     });

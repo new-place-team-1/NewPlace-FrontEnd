@@ -1,18 +1,30 @@
 import { useField, useFormikContext } from "formik";
-
 import { Checkbox, Typography } from "src/components/MUI";
 import StyledErrorMessage from "src/components/form/shared/ErrorMessage.styled";
 
 function CheckboxField(props: any) {
+  const { label, handleChange } = props;
   const [field, meta] = useField(props);
-  const { isSubmitting } = useFormikContext();
+  const { isSubmitting, values, setValues, validateForm } = useFormikContext();
 
   return (
     <div className="checkbox-field">
       <label>
-        <Checkbox {...field} {...props} disabled={isSubmitting} />
+        <Checkbox
+          {...field}
+          {...props}
+          onChange={async event => {
+            if (handleChange) {
+              await handleChange(event, values, setValues);
+              validateForm();
+            } else {
+              field.onChange(event);
+            }
+          }}
+          disabled={isSubmitting}
+        />
         <Typography variant="caption" component="span">
-          {props.value}
+          {label}
         </Typography>
       </label>
       {meta.touched && meta.error && (

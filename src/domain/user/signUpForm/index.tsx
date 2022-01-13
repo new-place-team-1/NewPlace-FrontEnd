@@ -23,32 +23,56 @@ function SignUpForm({ open, onClose, size }: IProps) {
     return new Promise(resolve => resolve(values));
   }, []);
 
-  const handleAgreeContactChange = useCallback(event => {
+  const handleAgreeContactChange = useCallback((event, values, setValues) => {
+    const checked = event.target.checked;
+
+    setValues({
+      ...values,
+      agree: checked && values.agreePolicy,
+      agreeContact: checked,
+    });
     setAgreeContact(event.target.checked);
   }, []);
 
-  const handleAgreePolicyChange = useCallback(event => {
+  const handleAgreePolicyChange = useCallback((event, values, setValues) => {
+    const checked = event.target.checked;
+
+    setValues({
+      ...values,
+      agree: checked && values.agreeContact,
+      agreePolicy: checked,
+    });
     setAgreePolicy(event.target.checked);
   }, []);
 
-  const handleAgreeAllChange = useCallback(event => {
-    setAgreeContact(event.target.checked);
-    setAgreePolicy(event.target.checked);
+  const handleAgreeAllChange = useCallback((event, values, setValues) => {
+    const checked = event.target.checked;
+
+    setValues({
+      ...values,
+      agree: checked,
+      agreeContact: checked,
+      agreePolicy: checked,
+    });
+    setAgreeContact(checked);
+    setAgreePolicy(checked);
   }, []);
 
   const initialValues = {
     email: "",
     password: "",
     passwordConfirm: "",
-    userName: "",
+    name: "",
     phoneNumber: "",
     agree: false,
+    agreeContact: false,
+    agreePolicy: false,
   };
   const validationSchema = Yup.object({
     email: Yup.string().required(errorMessage.email.required),
     password: Yup.string().required(errorMessage.password.required),
     passwordConfirm: Yup.string().required(errorMessage.passwordConfirm.required),
-    userName: Yup.string().required(errorMessage.userName.required),
+    name: Yup.string().required(errorMessage.name.required),
     phoneNumber: Yup.string().required(errorMessage.phoneNumber.required),
     agree: Yup.boolean().oneOf([true], errorMessage.agree.required),
   });
@@ -75,28 +99,30 @@ function SignUpForm({ open, onClose, size }: IProps) {
             color="secondary"
             fullWidth
           />
-          <Field type="text" name="userName" label="이름" variant="standard" color="secondary" fullWidth />
+          <Field type="text" name="name" label="이름" variant="standard" color="secondary" fullWidth />
           <Field type="text" name="phoneNumber" label="휴대폰 번호" variant="standard" color="secondary" fullWidth />
           <CheckboxField
             name="agree"
-            value="전체 약관 동의"
             color="secondary"
+            label="전체 약관 동의"
             checked={agreeContact && agreePolicy}
-            onChange={handleAgreeAllChange}
+            handleChange={handleAgreeAllChange}
           />
           <StyledBox>
-            <label>
-              <Checkbox color="secondary" onChange={handleAgreeContactChange} checked={agreeContact} />
-              <Typography variant="caption" component="span">
-                회원 가입 및 운영 약관 동의 (필수)
-              </Typography>
-            </label>
-            <label>
-              <Checkbox color="secondary" onChange={handleAgreePolicyChange} checked={agreePolicy} />
-              <Typography variant="caption" component="span">
-                개인정보 처리방침 동의 (필수)
-              </Typography>
-            </label>
+            <CheckboxField
+              name="agreeContact"
+              color="secondary"
+              label="회원 가입 및 운영 약관 동의 (필수)"
+              checked={agreeContact}
+              handleChange={handleAgreeContactChange}
+            />
+            <CheckboxField
+              name="agreePolicy"
+              color="secondary"
+              label="개인정보 처리방침 동의 (필수)"
+              checked={agreePolicy}
+              handleChange={handleAgreePolicyChange}
+            />
           </StyledBox>
           <Button type="submit" variant="contained" sx={{ alignSelf: "center", marginTop: 1 }}>
             계속
