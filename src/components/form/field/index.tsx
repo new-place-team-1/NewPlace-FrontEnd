@@ -1,4 +1,5 @@
 import { useField, useFormikContext } from "formik";
+import { cloneDeep, omit } from "lodash";
 
 import { TextField } from "src/components/MUI";
 import StyledErrorMessage from "src/components/form/shared/ErrorMessage.styled";
@@ -6,17 +7,19 @@ import StyledErrorMessage from "src/components/form/shared/ErrorMessage.styled";
 function Field(props: any) {
   const { handleChange } = props;
   const [field, meta] = useField(props);
-  const { isSubmitting } = useFormikContext();
+  const { isSubmitting, values, setValues, validateForm } = useFormikContext();
 
   return (
     <div className="field" style={{ margin: 8 }}>
       <TextField
         {...field}
-        {...props}
-        onChange={event => {
-          field.onChange(event);
+        {...omit(cloneDeep(props), ["handleChange"])}
+        onChange={async event => {
           if (handleChange) {
-            handleChange(event);
+            await handleChange(event, values, setValues);
+            validateForm();
+          } else {
+            field.onChange(event);
           }
         }}
         disabled={isSubmitting}

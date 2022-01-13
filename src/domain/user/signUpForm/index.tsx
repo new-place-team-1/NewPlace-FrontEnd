@@ -3,7 +3,7 @@ import * as Yup from "yup";
 
 import { StyledBox } from "./SignUpForm.styled";
 import { errorMessage } from "src/config/message";
-import { Typography, Paper, Button, Checkbox } from "src/components/MUI";
+import { Typography, Paper, Button } from "src/components/MUI";
 import CustomModal, { ModalSize } from "src/components/MUI/customs/modal";
 import CustomForm from "src/components/form";
 import Field from "src/components/form/field";

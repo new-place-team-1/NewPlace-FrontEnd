@@ -1,4 +1,6 @@
 import { useField, useFormikContext } from "formik";
+import { cloneDeep, omit } from "lodash";
+
 import { Checkbox, Typography } from "src/components/MUI";
 import StyledErrorMessage from "src/components/form/shared/ErrorMessage.styled";
 
@@ -12,7 +14,7 @@ function CheckboxField(props: any) {
       <label>
         <Checkbox
           {...field}
-          {...props}
+          {...omit(cloneDeep(props), ["handleChange"])}
           onChange={async event => {
             if (handleChange) {
               await handleChange(event, values, setValues);
