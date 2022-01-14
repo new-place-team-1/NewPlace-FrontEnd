@@ -25,6 +25,9 @@ jobs:
       - name: Cypress run unit
         run: yarn test:unit:run
 
+      - name: start localhost
+        run: yarn start
+
       - name: Cypress run integration
         uses: cypress-io/github-action@v2
         with:
