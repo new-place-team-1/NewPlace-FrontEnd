@@ -6,7 +6,7 @@ import theme from "src/utils/contexts/Theme";
 
 describe("SignUpForm", () => {
   beforeEach(function () {
-    cy.viewport(300, 700);
+    cy.viewport(400, 700);
     this.props = {
       open: true,
       handleClose: cy.stub().as("handleClose"),
@@ -30,8 +30,7 @@ describe("SignUpForm", () => {
   });
 
   it("Given open=true, Then render SignUpForm", function () {
-    cy.get("#sign-up-form").as("form");
-    cy.get("@form").find(".MuiPaper-root").should("have.css", "width", "280px");
+    cy.get("#sign-up-form form").should("exist");
 
     cy.contains("회원가입");
     cy.get("input[name='email']");
