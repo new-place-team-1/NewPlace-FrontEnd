@@ -48,19 +48,19 @@ function Layout() {
 
   return (
     <Fragment>
-      <Header handleSignUpFormOpen={handleSignUpFormOpen} />
-      {!isDesktopsize && <BottomMenu handleSignUpFormOpen={handleSignUpFormOpen} />}
-      {isOpenSignUpFormModal && (
-        <SignUpForm
-          open={isOpenSignUpFormModal}
-          handleClose={handleSignUpFormClose}
-          handleSignInFormOpen={handleSignInFormOpen}
-          handleSnackbarOpen={handleSnackbarOpen}
-          size="small"
-          // TODO: 소셜로그인 추가되고 모달창 내용물 많아지면, size={isDesktopsize ? "big" : "small"}
-        />
+      <Header handleSignUpFormOpen={handleSignUpFormOpen} handleSignInFormOpen={handleSignInFormOpen} />
+      {!isDesktopsize && (
+        <BottomMenu handleSignUpFormOpen={handleSignUpFormOpen} handleSignInFormOpen={handleSignInFormOpen} />
       )}
-      {isOpenSignInFormModal && <SignInForm open={isOpenSignInFormModal} onClose={handleSignInFormClose} />}
+      <SignUpForm
+        open={isOpenSignUpFormModal}
+        handleClose={handleSignUpFormClose}
+        handleSignInFormOpen={handleSignInFormOpen}
+        handleSnackbarOpen={handleSnackbarOpen}
+        size="small"
+        // TODO: 소셜로그인 추가되고 모달창 내용물 많아지면, size={isDesktopsize ? "big" : "small"}
+      />
+      <SignInForm open={isOpenSignInFormModal} onClose={handleSignInFormClose} />
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
         open={isOpenSnackbar}

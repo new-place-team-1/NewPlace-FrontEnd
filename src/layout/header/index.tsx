@@ -21,9 +21,10 @@ function MobileHeader() {
 
 interface IPropsOfDesktopHeader {
   handleSignUpFormOpen: () => void;
+  handleSignInFormOpen: () => void;
 }
 
-function DesktopHeader({ handleSignUpFormOpen }: IPropsOfDesktopHeader) {
+function DesktopHeader({ handleSignUpFormOpen, handleSignInFormOpen }: IPropsOfDesktopHeader) {
   return (
     <StyledDesktopHeader id="desktop-header">
       <Logo width={180} height={42} />
@@ -33,7 +34,7 @@ function DesktopHeader({ handleSignUpFormOpen }: IPropsOfDesktopHeader) {
         <Button color="secondary" onClick={handleSignUpFormOpen}>
           회원가입
         </Button>
-        <Button variant="outlined" size="large">
+        <Button variant="outlined" size="large" onClick={handleSignInFormOpen}>
           로그인
         </Button>
       </div>
@@ -43,16 +44,21 @@ function DesktopHeader({ handleSignUpFormOpen }: IPropsOfDesktopHeader) {
 
 interface IProps {
   handleSignUpFormOpen: () => void;
+  handleSignInFormOpen: () => void;
 }
 
-function Header({ handleSignUpFormOpen }: IProps) {
+function Header({ handleSignUpFormOpen, handleSignInFormOpen }: IProps) {
   const isDesktopsize = useMediaQuery({
     query: `(min-width: ${sizeBoundary}px)`,
   });
 
   return (
     <Fragment>
-      {isDesktopsize ? <DesktopHeader handleSignUpFormOpen={handleSignUpFormOpen} /> : <MobileHeader />}
+      {isDesktopsize ? (
+        <DesktopHeader handleSignUpFormOpen={handleSignUpFormOpen} handleSignInFormOpen={handleSignInFormOpen} />
+      ) : (
+        <MobileHeader />
+      )}
     </Fragment>
   );
 }
