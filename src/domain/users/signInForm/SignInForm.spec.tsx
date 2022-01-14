@@ -8,7 +8,7 @@ describe("SignInForm", () => {
   beforeEach(function () {
     this.props = {
       open: true,
-      onClose: cy.stub().as("onClose"),
+      handleClose: cy.stub().as("handleClose"),
     };
     mount(
       <ThemeProvider theme={theme}>
@@ -36,8 +36,8 @@ describe("SignInForm", () => {
     cy.get("button").contains("계속");
   });
 
-  it("When click outside, Then call onClose", function () {
+  it("When click outside, Then call handleClose", function () {
     cy.get("#sign-in-form").click(1, 1);
-    cy.get("@onClose").should("have.been.calledOnce");
+    cy.get("@handleClose").should("have.been.calledOnce");
   });
 });
