@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { useCallback } from "react";
 import * as Yup from "yup";
 import Swal from "sweetalert2";
 
@@ -6,16 +6,17 @@ import regExp from "src/config/regExp";
 import { errorMessage, alertMessage } from "src/config/message";
 import { signIn } from "src/services/users";
 import { Typography, Paper, Button } from "src/components/MUI";
-import CustomModal from "src/components/MUI/customs/modal";
+import CustomModal, { ModalSize } from "src/components/MUI/customs/modal";
 import CustomForm from "src/components/form";
 import Field from "src/components/form/field";
 
 interface IProps {
+  size: ModalSize;
   open: boolean;
   handleClose: () => void;
 }
 
-function SignInForm({ open, handleClose }: IProps) {
+function SignInForm({ size, open, handleClose }: IProps) {
   const initialValues = {
     email: "",
     password: "",
@@ -45,9 +46,13 @@ function SignInForm({ open, handleClose }: IProps) {
     [handleClose],
   );
 
+  const paperStyle = {
+    padding: size === "small" ? 2 : 6,
+  };
+
   return (
-    <CustomModal id="sign-in-form" open={open} onClose={handleClose} size="small">
-      <Paper elevation={2} sx={{ padding: 2 }}>
+    <CustomModal id="sign-in-form" open={open} onClose={handleClose} size={size}>
+      <Paper elevation={2} sx={paperStyle}>
         <CustomForm
           initialValues={initialValues}
           validationSchema={validationSchema}

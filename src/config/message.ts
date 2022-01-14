@@ -27,7 +27,7 @@ export const errorMessage = {
 export const alertMessage = {
   signUp: {
     success: {
-      title: "회원가입에 성공했습니다.\n 로그인을 해주세요.",
+      text: "회원가입에 성공했습니다.",
     },
     error: {
       title: "회원가입 실패",

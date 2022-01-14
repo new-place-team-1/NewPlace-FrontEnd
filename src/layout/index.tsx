@@ -9,32 +9,32 @@ import SignInForm from "src/domain/users/signInForm";
 import { Snackbar, Alert } from "src/components/MUI";
 
 function Layout() {
-  const [isOpenSignUpFormModal, setIsOpenSignUpFormModal] = useState<boolean>(false);
-  const [isOpenSignInFormModal, setIsOpenSignInFormModal] = useState<boolean>(false);
-  const [isOpenSnackbar, setIsOpenSnackbar] = useState<boolean>(false);
+  const [isSignUpFormModalOpen, setIsSignUpFormModalOpen] = useState<boolean>(false);
+  const [isSignInFormModalOpen, setIsSignInFormModalOpen] = useState<boolean>(false);
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState<boolean>(false);
   const [snackbarMessage, setSnackbarMessage] = useState<string>("");
   const isDesktopsize = useMediaQuery({
     query: `(min-width: ${sizeBoundary}px)`,
   });
 
   const handleSignUpFormOpen = () => {
-    setIsOpenSignUpFormModal(true);
+    setIsSignUpFormModalOpen(true);
   };
 
   const handleSignUpFormClose = () => {
-    setIsOpenSignUpFormModal(false);
+    setIsSignUpFormModalOpen(false);
   };
 
   const handleSignInFormOpen = () => {
-    setIsOpenSignInFormModal(true);
+    setIsSignInFormModalOpen(true);
   };
 
   const handleSignInFormClose = () => {
-    setIsOpenSignInFormModal(false);
+    setIsSignInFormModalOpen(false);
   };
 
   const handleSnackbarOpen = (message: string) => {
-    setIsOpenSnackbar(true);
+    setIsSnackbarOpen(true);
     setSnackbarMessage(message);
   };
 
@@ -43,7 +43,7 @@ function Layout() {
       return;
     }
 
-    setIsOpenSnackbar(false);
+    setIsSnackbarOpen(false);
   };
 
   return (
@@ -53,21 +53,24 @@ function Layout() {
         <BottomMenu handleSignUpFormOpen={handleSignUpFormOpen} handleSignInFormOpen={handleSignInFormOpen} />
       )}
       <SignUpForm
-        open={isOpenSignUpFormModal}
+        open={isSignUpFormModalOpen}
         handleClose={handleSignUpFormClose}
         handleSignInFormOpen={handleSignInFormOpen}
         handleSnackbarOpen={handleSnackbarOpen}
-        size="small"
-        // TODO: 소셜로그인 추가되고 모달창 내용물 많아지면, size={isDesktopsize ? "big" : "small"}
+        size={isDesktopsize ? "medium" : "small"}
       />
-      <SignInForm open={isOpenSignInFormModal} handleClose={handleSignInFormClose} />
+      <SignInForm
+        size={isDesktopsize ? "medium" : "small"}
+        open={isSignInFormModalOpen}
+        handleClose={handleSignInFormClose}
+      />
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        open={isOpenSnackbar}
+        open={isSnackbarOpen}
         autoHideDuration={6000}
         onClose={handleSnackbarClose}
       >
-        <Alert onClose={handleSnackbarClose} variant="filled" severity="success" sx={{ width: "100%" }}>
+        <Alert onClose={handleSnackbarClose} variant="filled" severity="success">
           {snackbarMessage}
         </Alert>
       </Snackbar>

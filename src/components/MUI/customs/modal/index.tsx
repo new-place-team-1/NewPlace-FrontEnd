@@ -1,6 +1,6 @@
 import { Modal, Paper } from "src/components/MUI";
 
-export type ModalSize = "small" | "big";
+export type ModalSize = "small" | "medium" | "large";
 
 interface IProps {
   open: boolean;
@@ -11,7 +11,7 @@ interface IProps {
 }
 
 function CustomModal({ open, onClose, size, children, id }: IProps) {
-  const paperWidth = size === "small" ? 280 : size === "big" ? 800 : 0;
+  const paperWidth = size === "small" ? 320 : size === "medium" ? 460 : size === "large" ? 800 : 0;
 
   return (
     <Modal id={id} open={open} onClose={onClose}>
@@ -23,6 +23,9 @@ function CustomModal({ open, onClose, size, children, id }: IProps) {
           left: "50%",
           transform: "translate(-50%, -50%)",
           width: paperWidth,
+          maxWidth: "100%",
+          maxHeight: "90%",
+          overflowY: "auto",
         }}
       >
         {children}

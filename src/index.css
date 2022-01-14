@@ -22,3 +22,12 @@ code {
 .swal2-html-container {
   font-size: 18px !important;
 }
+
+.swal2-popup {
+  width: 480px !important;
+}
+
+.swal2-styled.swal2-confirm {
+  width: 105px;
+  height: 42px;
+}

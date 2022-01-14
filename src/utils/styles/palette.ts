@@ -1,5 +1,8 @@
 const palette = {
-  primaryColor: "#F73F52",
+  primary: {
+    main: "#F73F52",
+    light: "#ff6e7d",
+  },
   font: {
     main: "#222222",
     light: "898989",

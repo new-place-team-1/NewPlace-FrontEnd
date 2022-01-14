@@ -14,14 +14,14 @@ import Field from "src/components/form/field";
 import CheckboxField from "src/components/form/checkboxField";
 
 interface IProps {
+  size: ModalSize;
   open: boolean;
   handleClose: () => void;
   handleSignInFormOpen: () => void;
   handleSnackbarOpen: (message: string) => void;
-  size: ModalSize;
 }
 
-function SignUpForm({ open, handleClose, handleSignInFormOpen, handleSnackbarOpen, size }: IProps) {
+function SignUpForm({ size, open, handleClose, handleSignInFormOpen, handleSnackbarOpen }: IProps) {
   const [agreeContact, setAgreeContact] = useState<boolean>(false);
   const [agreePolicy, setAgreePolicy] = useState<boolean>(false);
   const initialValues: ISignUpFormValues = useMemo(() => {
@@ -57,7 +57,7 @@ function SignUpForm({ open, handleClose, handleSignInFormOpen, handleSnackbarOpe
         .then(() => {
           handleSignInFormOpen();
           handleClose();
-          handleSnackbarOpen(alertMessage.signUp.success.title);
+          handleSnackbarOpen(alertMessage.signUp.success.text);
         })
         .catch(() => {
           actions.resetForm({
@@ -107,9 +107,13 @@ function SignUpForm({ open, handleClose, handleSignInFormOpen, handleSnackbarOpe
     setAgreePolicy(checked);
   }, []);
 
+  const paperStyle = {
+    padding: size === "small" ? 2 : 6,
+  };
+
   return (
     <CustomModal id="sign-up-form" open={open} onClose={handleClose} size={size}>
-      <Paper elevation={2} sx={{ padding: 2 }}>
+      <Paper elevation={2} sx={paperStyle}>
         <CustomForm
           initialValues={initialValues}
           validationSchema={validationSchema}
