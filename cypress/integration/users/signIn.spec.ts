@@ -2,7 +2,7 @@
 
 import { USERS } from "src/config/endpoint";
 import { viewportSizeForTest } from "src/config/device";
-import { errorMessage } from "src/config/message";
+import { alertMessage, errorMessage } from "src/config/message";
 
 describe("sign in", () => {
   describe("mobile view", () => {
@@ -65,8 +65,13 @@ describe("sign in", () => {
       });
     });
 
-    describe("submit success", () => {
-      beforeEach(() => {
+    describe("submit", () => {
+      const typedValue = {
+        email: "abcd@gmail.com",
+        password: "1234abcd!",
+      };
+
+      it("When type proper values and click submit button, Then clear form and submit successfully", () => {
         cy.intercept("post", USERS.SESSION, req => {
           req.reply({
             // TODO: stub token 인증 로직 정해지면
@@ -77,20 +82,14 @@ describe("sign in", () => {
             body: {
               data: "OK",
             },
+            delay: 1000,
           });
         }).as("api");
 
         cy.contains("로그인").click();
-      });
 
-      it("When type proper values and click submit button, Then clear form and submit successfully", () => {
-        const validTypedValue = {
-          email: "abcd@gmail.com",
-          password: "1234abcd!",
-        };
-
-        cy.contains("이메일").closest(".field").find("input").type(validTypedValue.email);
-        cy.contains("비밀번호").closest(".field").find("input").type(validTypedValue.password);
+        cy.contains("이메일").closest(".field").find("input").type(typedValue.email);
+        cy.contains("비밀번호").closest(".field").find("input").type(typedValue.password);
         cy.contains("계속").click();
 
         cy.get(".error").should("have.length", 0);
@@ -99,12 +98,31 @@ describe("sign in", () => {
             request: { body },
           } = interception;
 
-          expect(body).to.deep.equal(validTypedValue);
+          expect(body).to.deep.equal(typedValue);
         });
         cy.get("#sign-in-form").should("not.exist");
         // TODO: stub token, and rerendering after submit success
         // cy.getCookie('token').should('have.property', 'value', '123ABC')
         // cy.contains("위시리스트").should("exist");
+      });
+
+      it("When type wrong email or password and click submit button, Then show error message and sign in failed", () => {
+        cy.intercept("post", USERS.SESSION, req => {
+          req.reply({
+            // TODO: 응답 명세 상의
+            statusCode: 400,
+            delay: 1000,
+          });
+        }).as("api");
+
+        cy.contains("로그인").click();
+        cy.contains("이메일").closest(".field").find("input").type(typedValue.email);
+        cy.contains("비밀번호").closest(".field").find("input").type(typedValue.password);
+        cy.contains("계속").click();
+
+        cy.contains(alertMessage.signIn.error.title);
+        // TODO: token 정하기
+        // cy.getCookie("token").should("not.exist");
       });
     });
   });

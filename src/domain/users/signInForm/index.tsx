@@ -1,8 +1,9 @@
 import { useCallback, useMemo } from "react";
 import * as Yup from "yup";
+import Swal from "sweetalert2";
 
 import regExp from "src/config/regExp";
-import { errorMessage } from "src/config/message";
+import { errorMessage, alertMessage } from "src/config/message";
 import { signIn } from "src/services/users";
 import { Typography, Paper, Button } from "src/components/MUI";
 import CustomModal from "src/components/MUI/customs/modal";
@@ -15,12 +16,10 @@ interface IProps {
 }
 
 function SignInForm({ open, handleClose }: IProps) {
-  const initialValues = useMemo(() => {
-    return {
-      email: "",
-      password: "",
-    };
-  }, []);
+  const initialValues = {
+    email: "",
+    password: "",
+  };
   const validationSchema = Yup.object({
     email: Yup.string().required(errorMessage.email.required).matches(regExp.email, errorMessage.email.match),
     password: Yup.string()
@@ -35,13 +34,14 @@ function SignInForm({ open, handleClose }: IProps) {
           handleClose();
         })
         .catch(() => {
-          actions.resetForm({
-            values: initialValues,
+          Swal.fire({
+            icon: "error",
+            title: alertMessage.signIn.error.title,
+            text: alertMessage.signIn.error.text,
           });
-          // TODO: set formik error message
         });
     },
-    [handleClose, initialValues],
+    [handleClose],
   );
 
   return (
