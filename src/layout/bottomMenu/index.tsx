@@ -12,10 +12,10 @@ function BottomMenu({ handleSignUpFormOpen, handleSignInFormOpen }: IProps) {
       <BottomNavigation
         showLabels
         onChange={(event, newValue) => {
-          console.log(newValue);
           // TODO: 각 메뉴에따라 history.push 혹은 모달 open
           const signUp = newValue === 1;
           const signIn = newValue === 2;
+
           if (signUp) {
             handleSignUpFormOpen();
           }

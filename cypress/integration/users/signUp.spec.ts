@@ -45,6 +45,7 @@ describe("sign up", () => {
 
         cy.get("#sign-up-form input[name='agree']").should("be.checked");
       });
+
       it("Given all checked, When click any sub checkboxes, Then agree not checked", () => {
         cy.contains("회원 가입 및 운영 약관 동의 (필수)").click();
         cy.contains("개인정보 처리방침 동의 (필수)").click();
