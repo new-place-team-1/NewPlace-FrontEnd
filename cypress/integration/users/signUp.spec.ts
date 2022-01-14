@@ -2,7 +2,7 @@
 
 import { USERS } from "src/config/endpoint";
 import { viewportSizeForTest } from "src/config/device";
-import { errorMessage, alertMessage } from "src/config/message";
+import { errorMessage } from "src/config/message";
 
 describe("sign up", () => {
   describe("mobile view", () => {

@@ -1,6 +1,8 @@
 import { useCallback } from "react";
 import * as Yup from "yup";
 
+import regExp from "src/config/regExp";
+import { errorMessage } from "src/config/message";
 import { Typography, Paper, Button } from "src/components/MUI";
 import CustomModal from "src/components/MUI/customs/modal";
 import CustomForm from "src/components/form";
@@ -16,17 +18,11 @@ function SignInForm({ open, onClose }: IProps) {
     email: "",
     password: "",
   };
-  const errorMessage = {
-    email: {
-      required: "이메일을 입력해주세요.",
-    },
-    password: {
-      required: "비밀번호를 입력해주세요.",
-    },
-  };
   const validationSchema = Yup.object({
-    email: Yup.string().required(errorMessage.email.required),
-    password: Yup.string().required(errorMessage.password.required),
+    email: Yup.string().required(errorMessage.email.required).matches(regExp.email, errorMessage.email.match),
+    password: Yup.string()
+      .required(errorMessage.password.required)
+      .matches(regExp.password, errorMessage.password.match),
   });
 
   const handleSubmit = useCallback(values => {
