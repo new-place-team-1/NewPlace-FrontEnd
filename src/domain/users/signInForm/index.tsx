@@ -1,8 +1,9 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import * as Yup from "yup";
 
 import regExp from "src/config/regExp";
 import { errorMessage } from "src/config/message";
+import { signIn } from "src/services/users";
 import { Typography, Paper, Button } from "src/components/MUI";
 import CustomModal from "src/components/MUI/customs/modal";
 import CustomForm from "src/components/form";
@@ -10,14 +11,16 @@ import Field from "src/components/form/field";
 
 interface IProps {
   open: boolean;
-  onClose: () => void;
+  handleClose: () => void;
 }
 
-function SignInForm({ open, onClose }: IProps) {
-  const initialValues = {
-    email: "",
-    password: "",
-  };
+function SignInForm({ open, handleClose }: IProps) {
+  const initialValues = useMemo(() => {
+    return {
+      email: "",
+      password: "",
+    };
+  }, []);
   const validationSchema = Yup.object({
     email: Yup.string().required(errorMessage.email.required).matches(regExp.email, errorMessage.email.match),
     password: Yup.string()
@@ -25,12 +28,24 @@ function SignInForm({ open, onClose }: IProps) {
       .matches(regExp.password, errorMessage.password.match),
   });
 
-  const handleSubmit = useCallback(values => {
-    return new Promise(resolve => resolve(values));
-  }, []);
+  const handleSubmit = useCallback(
+    (values: ISignInFormValues, actions) => {
+      signIn(values)
+        .then(() => {
+          handleClose();
+        })
+        .catch(() => {
+          actions.resetForm({
+            values: initialValues,
+          });
+          // TODO: set formik error message
+        });
+    },
+    [handleClose, initialValues],
+  );
 
   return (
-    <CustomModal id="sign-in-form" open={open} onClose={onClose} size="small">
+    <CustomModal id="sign-in-form" open={open} onClose={handleClose} size="small">
       <Paper elevation={2} sx={{ padding: 2 }}>
         <CustomForm
           initialValues={initialValues}

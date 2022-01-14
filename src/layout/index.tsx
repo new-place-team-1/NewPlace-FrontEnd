@@ -60,7 +60,7 @@ function Layout() {
         size="small"
         // TODO: 소셜로그인 추가되고 모달창 내용물 많아지면, size={isDesktopsize ? "big" : "small"}
       />
-      <SignInForm open={isOpenSignInFormModal} onClose={handleSignInFormClose} />
+      <SignInForm open={isOpenSignInFormModal} handleClose={handleSignInFormClose} />
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
         open={isOpenSnackbar}

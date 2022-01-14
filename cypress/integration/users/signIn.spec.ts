@@ -36,14 +36,7 @@ describe("sign in", () => {
 
     describe("validation", () => {
       beforeEach(() => {
-        cy.intercept("post", USERS.SESSION, req => {
-          req.reply({
-            statusCode: 201,
-            body: {
-              data: "OK",
-            },
-          });
-        }).as("api");
+        cy.intercept("post", USERS.SESSION).as("api");
 
         cy.contains("로그인").click();
       });
@@ -69,6 +62,49 @@ describe("sign in", () => {
         cy.contains(errorMessage.email.match);
         cy.contains(errorMessage.password.match);
         cy.get("@api").should("eq", null);
+      });
+    });
+
+    describe("submit success", () => {
+      beforeEach(() => {
+        cy.intercept("post", USERS.SESSION, req => {
+          req.reply({
+            // TODO: stub token 인증 로직 정해지면
+            // headers: {
+            //   "Set-Cookie": "token=123ABC;",
+            // },
+            statusCode: 201,
+            body: {
+              data: "OK",
+            },
+          });
+        }).as("api");
+
+        cy.contains("로그인").click();
+      });
+
+      it("When type proper values and click submit button, Then clear form and submit successfully", () => {
+        const validTypedValue = {
+          email: "abcd@gmail.com",
+          password: "1234abcd!",
+        };
+
+        cy.contains("이메일").closest(".field").find("input").type(validTypedValue.email);
+        cy.contains("비밀번호").closest(".field").find("input").type(validTypedValue.password);
+        cy.contains("계속").click();
+
+        cy.get(".error").should("have.length", 0);
+        cy.wait("@api").then(interception => {
+          const {
+            request: { body },
+          } = interception;
+
+          expect(body).to.deep.equal(validTypedValue);
+        });
+        cy.get("#sign-in-form").should("not.exist");
+        // TODO: stub token, and rerendering after submit success
+        // cy.getCookie('token').should('have.property', 'value', '123ABC')
+        // cy.contains("위시리스트").should("exist");
       });
     });
   });

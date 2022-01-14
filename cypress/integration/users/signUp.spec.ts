@@ -75,14 +75,7 @@ describe("sign up", () => {
 
     describe("validation", () => {
       beforeEach(() => {
-        cy.intercept("post", USERS.INDEX, req => {
-          req.reply({
-            statusCode: 201,
-            body: {
-              data: "OK",
-            },
-          });
-        }).as("api");
+        cy.intercept("post", USERS.INDEX).as("api");
 
         cy.contains("회원가입").click();
       });
