@@ -34,6 +34,7 @@ function SignInForm({ open, handleClose }: IProps) {
           handleClose();
         })
         .catch(() => {
+          actions.setSubmitting(false);
           Swal.fire({
             icon: "error",
             title: alertMessage.signIn.error.title,
