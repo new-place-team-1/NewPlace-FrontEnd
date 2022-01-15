@@ -2,7 +2,7 @@
 
 import { USERS } from "src/config/endpoint";
 import { viewportSizeForTest } from "src/config/device";
-import { errorMessage } from "src/config/message";
+import { validationMessage } from "src/config/message";
 
 describe("sign up", () => {
   describe("mobile view", () => {
@@ -84,12 +84,12 @@ describe("sign up", () => {
       it("Given empty fields, When click submit button, Then show validation error message and not call submit", () => {
         cy.contains("계속").click();
 
-        cy.contains(errorMessage.email.required);
-        cy.contains(errorMessage.password.required);
-        cy.contains(errorMessage.passwordConfirm.required);
-        cy.contains(errorMessage.name.required);
-        cy.contains(errorMessage.phoneNumber.required);
-        cy.contains(errorMessage.agree.required);
+        cy.contains(validationMessage.email.required);
+        cy.contains(validationMessage.password.required);
+        cy.contains(validationMessage.passwordConfirm.required);
+        cy.contains(validationMessage.name.required);
+        cy.contains(validationMessage.phoneNumber.required);
+        cy.contains(validationMessage.agree.required);
         cy.get("@api").should("eq", null);
       });
 
@@ -109,11 +109,11 @@ describe("sign up", () => {
         cy.contains("휴대폰 번호").closest(".field").find("input").type(invalidTypedValue.phoneNumber);
         cy.contains("계속").click();
 
-        cy.contains(errorMessage.email.match);
-        cy.contains(errorMessage.password.match);
-        cy.contains(errorMessage.passwordConfirm.match);
-        cy.contains(errorMessage.name.match);
-        cy.contains(errorMessage.phoneNumber.match);
+        cy.contains(validationMessage.email.match);
+        cy.contains(validationMessage.password.match);
+        cy.contains(validationMessage.passwordConfirm.match);
+        cy.contains(validationMessage.name.match);
+        cy.contains(validationMessage.phoneNumber.match);
         cy.get("@api").should("eq", null);
       });
     });

@@ -2,7 +2,7 @@
 
 import { USERS } from "src/config/endpoint";
 import { viewportSizeForTest } from "src/config/device";
-import { alertMessage, errorMessage } from "src/config/message";
+import { alertMessage, validationMessage } from "src/config/message";
 
 describe("sign in", () => {
   describe("mobile view", () => {
@@ -44,8 +44,8 @@ describe("sign in", () => {
       it("Given empty fields, When click submit button, Then show validation error message and not call submit", () => {
         cy.contains("계속").click();
 
-        cy.contains(errorMessage.email.required);
-        cy.contains(errorMessage.password.required);
+        cy.contains(validationMessage.email.required);
+        cy.contains(validationMessage.password.required);
         cy.get("@api").should("eq", null);
       });
 
@@ -59,8 +59,8 @@ describe("sign in", () => {
         cy.contains("비밀번호").closest(".field").find("input").type(invalidTypedValue.password);
         cy.contains("계속").click();
 
-        cy.contains(errorMessage.email.match);
-        cy.contains(errorMessage.password.match);
+        cy.contains(validationMessage.email.match);
+        cy.contains(validationMessage.password.match);
         cy.get("@api").should("eq", null);
       });
     });

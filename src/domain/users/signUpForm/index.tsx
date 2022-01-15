@@ -4,7 +4,7 @@ import { omit } from "lodash";
 import Swal from "sweetalert2";
 
 import { StyledBox } from "./SignUpForm.styled";
-import { errorMessage, alertMessage } from "src/config/message";
+import { validationMessage, alertMessage } from "src/config/message";
 import regExp from "src/config/regExp";
 import { signUp } from "src/services/users";
 import { Typography, Paper, Button } from "src/components/MUI";
@@ -37,18 +37,18 @@ function SignUpForm({ size, open, handleClose, handleSignInFormOpen, handleSnack
     };
   }, []);
   const validationSchema = Yup.object({
-    email: Yup.string().required(errorMessage.email.required).matches(regExp.email, errorMessage.email.match),
+    email: Yup.string().required(validationMessage.email.required).matches(regExp.email, validationMessage.email.match),
     password: Yup.string()
-      .required(errorMessage.password.required)
-      .matches(regExp.password, errorMessage.password.match),
+      .required(validationMessage.password.required)
+      .matches(regExp.password, validationMessage.password.match),
     passwordConfirm: Yup.string()
-      .required(errorMessage.passwordConfirm.required)
-      .oneOf([Yup.ref("password")], errorMessage.passwordConfirm.match),
-    name: Yup.string().required(errorMessage.name.required).matches(regExp.userName, errorMessage.name.match),
+      .required(validationMessage.passwordConfirm.required)
+      .oneOf([Yup.ref("password")], validationMessage.passwordConfirm.match),
+    name: Yup.string().required(validationMessage.name.required).matches(regExp.userName, validationMessage.name.match),
     phoneNumber: Yup.string()
-      .required(errorMessage.phoneNumber.required)
-      .matches(regExp.phoneNumber, errorMessage.phoneNumber.match),
-    agree: Yup.boolean().oneOf([true], errorMessage.agree.required),
+      .required(validationMessage.phoneNumber.required)
+      .matches(regExp.phoneNumber, validationMessage.phoneNumber.match),
+    agree: Yup.boolean().oneOf([true], validationMessage.agree.required),
   });
 
   const handleSubmit = useCallback(

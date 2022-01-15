@@ -30,4 +30,5 @@ code {
 .swal2-styled.swal2-confirm {
   width: 105px;
   height: 42px;
+  background-color: #f73f52; /* primary.main */
 }

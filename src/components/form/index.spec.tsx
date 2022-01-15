@@ -42,17 +42,17 @@ describe("CustomForm", () => {
   }
 
   beforeEach(function () {
-    this.errorMessage = {
+    this.validationMessage = {
       required: "Required",
       tooShort: "Must be 6 characters or more",
       tooLong: "Must be 10 characters or less",
     };
     const validationSchema = Yup.object({
-      nickname: Yup.string().max(10, this.errorMessage.tooLong).required(this.errorMessage.required),
+      nickname: Yup.string().max(10, this.validationMessage.tooLong).required(this.validationMessage.required),
       password: Yup.string()
-        .min(6, this.errorMessage.tooShort)
-        .max(10, this.errorMessage.tooLong)
-        .required(this.errorMessage.required),
+        .min(6, this.validationMessage.tooShort)
+        .max(10, this.validationMessage.tooLong)
+        .required(this.validationMessage.required),
     });
     this.props = {
       initialValues: {
@@ -88,7 +88,7 @@ describe("CustomForm", () => {
   it("Given empty all field, When submit, Then not pass validation", function () {
     cy.get("form button").click();
     cy.get("@handleSubmit").should("not.have.been.called");
-    cy.get("form .error").contains(this.errorMessage.required);
+    cy.get("form .error").contains(this.validationMessage.required);
   });
 
   it("Given empty some field, When submit, Then not pass validation", function () {
@@ -97,7 +97,7 @@ describe("CustomForm", () => {
     cy.get("form input[name='nickname']").type(typedNickname);
     cy.get("form button").click();
     cy.get("@handleSubmit").should("not.have.been.called");
-    cy.get("form .error").contains(this.errorMessage.required);
+    cy.get("form .error").contains(this.validationMessage.required);
   });
 
   it("When short password or long password, Then not pass validation", function () {
@@ -107,12 +107,12 @@ describe("CustomForm", () => {
     cy.get("form input[name='password']").type(typedShortPassword);
     cy.get("form button").click();
     cy.get("@handleSubmit").should("not.have.been.called");
-    cy.get("form .error").contains(this.errorMessage.tooShort);
+    cy.get("form .error").contains(this.validationMessage.tooShort);
 
     cy.get("form input[name='password']").type(appendedTypedLongPawssword);
     cy.get("form button").click();
     cy.get("@handleSubmit").should("not.have.been.called");
-    cy.get("form .error").contains(this.errorMessage.tooLong);
+    cy.get("form .error").contains(this.validationMessage.tooLong);
   });
 });
 
@@ -135,11 +135,11 @@ describe("CustomForm with CheckboxField", () => {
   }
 
   beforeEach(function () {
-    this.errorMessage = {
+    this.validationMessage = {
       required: "Required",
     };
     const validationSchema = Yup.object({
-      agree: Yup.boolean().oneOf([true], this.errorMessage.required),
+      agree: Yup.boolean().oneOf([true], this.validationMessage.required),
     });
     this.props = {
       initialValues: {

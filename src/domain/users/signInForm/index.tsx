@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import Swal from "sweetalert2";
 
 import regExp from "src/config/regExp";
-import { errorMessage, alertMessage } from "src/config/message";
+import { validationMessage, alertMessage } from "src/config/message";
 import { signIn } from "src/services/users";
 import { Typography, Paper, Button } from "src/components/MUI";
 import CustomModal, { ModalSize } from "src/components/MUI/customs/modal";
@@ -22,10 +22,10 @@ function SignInForm({ size, open, handleClose }: IProps) {
     password: "",
   };
   const validationSchema = Yup.object({
-    email: Yup.string().required(errorMessage.email.required).matches(regExp.email, errorMessage.email.match),
+    email: Yup.string().required(validationMessage.email.required).matches(regExp.email, validationMessage.email.match),
     password: Yup.string()
-      .required(errorMessage.password.required)
-      .matches(regExp.password, errorMessage.password.match),
+      .required(validationMessage.password.required)
+      .matches(regExp.password, validationMessage.password.match),
   });
 
   const handleSubmit = useCallback(
