@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import palette from "src/utils/styles/palette";
 
 export const StyledMobileHeader = styled.header`
-  height: 30px;
+  height: 40px;
   box-shadow: 0 2px 2px 0 ${palette.layoutShadow};
   display: flex;
   align-items: center;
