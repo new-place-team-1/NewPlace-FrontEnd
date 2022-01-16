@@ -28,7 +28,7 @@ function SignUpForm({ size, open, handleClose, handleSignInFormOpen, handleSnack
     return {
       email: "",
       password: "",
-      passwordConfirm: "",
+      passwordVerified: "",
       name: "",
       phoneNumber: "",
       agree: false,
@@ -41,9 +41,9 @@ function SignUpForm({ size, open, handleClose, handleSignInFormOpen, handleSnack
     password: Yup.string()
       .required(validationMessage.password.required)
       .matches(regExp.password, validationMessage.password.match),
-    passwordConfirm: Yup.string()
-      .required(validationMessage.passwordConfirm.required)
-      .oneOf([Yup.ref("password")], validationMessage.passwordConfirm.match),
+    passwordVerified: Yup.string()
+      .required(validationMessage.passwordVerified.required)
+      .oneOf([Yup.ref("password")], validationMessage.passwordVerified.match),
     name: Yup.string().required(validationMessage.name.required).matches(regExp.userName, validationMessage.name.match),
     phoneNumber: Yup.string()
       .required(validationMessage.phoneNumber.required)
@@ -127,7 +127,7 @@ function SignUpForm({ size, open, handleClose, handleSignInFormOpen, handleSnack
           <Field type="password" name="password" label="비밀번호" variant="standard" color="secondary" fullWidth />
           <Field
             type="password"
-            name="passwordConfirm"
+            name="passwordVerified"
             label="비밀번호 확인"
             variant="standard"
             color="secondary"

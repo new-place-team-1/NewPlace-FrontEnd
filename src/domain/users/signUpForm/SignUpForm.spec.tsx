@@ -35,7 +35,7 @@ describe("SignUpForm", () => {
     cy.contains("회원가입");
     cy.get("input[name='email']");
     cy.get("input[name='password']");
-    cy.get("input[name='passwordConfirm']");
+    cy.get("input[name='passwordVerified']");
     cy.get("input[name='name']");
     cy.get("input[name='phoneNumber']");
     cy.get("input[name='agree']");

@@ -12,6 +12,6 @@ export const signUp = (payload: ISignUpRequestPayload) =>
 export const signIn = (payload: ISignInRequestPayload) =>
   axios({
     method: "post",
-    url: API_URL + USERS.SESSION,
+    url: API_URL + USERS.LOGIN,
     data: payload,
   });

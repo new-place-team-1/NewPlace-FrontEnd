@@ -1,7 +1,7 @@
 interface ISignUpFormValues {
   email: string;
   password: string;
-  passwordConfirm: string;
+  passwordVerified: string;
   name: string;
   phoneNumber: string;
   agree: boolean;
@@ -11,7 +11,7 @@ interface ISignUpFormValues {
 interface ISignUpRequestPayload {
   email: string;
   password: string;
-  passwordConfirm: string;
+  passwordVerified: string;
   name: string;
   phoneNumber: string;
 }

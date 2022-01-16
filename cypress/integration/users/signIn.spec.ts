@@ -36,7 +36,7 @@ describe("sign in", () => {
 
     describe("validation", () => {
       beforeEach(() => {
-        cy.intercept("post", USERS.SESSION).as("api");
+        cy.intercept("post", USERS.LOGIN).as("api");
 
         cy.contains("로그인").click();
       });
@@ -72,7 +72,7 @@ describe("sign in", () => {
       };
 
       it("When type proper values and click submit button, Then clear form and submit successfully", () => {
-        cy.intercept("post", USERS.SESSION, req => {
+        cy.intercept("post", USERS.LOGIN, req => {
           req.reply({
             // TODO: stub token 인증 로직 정해지면
             // headers: {
@@ -107,7 +107,7 @@ describe("sign in", () => {
       });
 
       it("When type wrong email or password and click submit button, Then show error message and sign in failed", () => {
-        cy.intercept("post", USERS.SESSION, req => {
+        cy.intercept("post", USERS.LOGIN, req => {
           req.reply({
             // TODO: 응답 명세 상의
             statusCode: 400,

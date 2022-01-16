@@ -86,7 +86,7 @@ describe("sign up", () => {
 
         cy.contains(validationMessage.email.required);
         cy.contains(validationMessage.password.required);
-        cy.contains(validationMessage.passwordConfirm.required);
+        cy.contains(validationMessage.passwordVerified.required);
         cy.contains(validationMessage.name.required);
         cy.contains(validationMessage.phoneNumber.required);
         cy.contains(validationMessage.agree.required);
@@ -97,21 +97,21 @@ describe("sign up", () => {
         const invalidTypedValue = {
           email: "abcdef",
           password: "123456",
-          passwordConfirm: "1234567",
+          passwordVerified: "1234567",
           name: "가나다라마바",
           phoneNumber: "010123456789",
         };
 
         cy.contains("이메일").closest(".field").find("input").type(invalidTypedValue.email);
         cy.contains("비밀번호").closest(".field").find("input").type(invalidTypedValue.password);
-        cy.contains("비밀번호 확인").closest(".field").find("input").type(invalidTypedValue.passwordConfirm);
+        cy.contains("비밀번호 확인").closest(".field").find("input").type(invalidTypedValue.passwordVerified);
         cy.contains("이름").closest(".field").find("input").type(invalidTypedValue.name);
         cy.contains("휴대폰 번호").closest(".field").find("input").type(invalidTypedValue.phoneNumber);
         cy.contains("계속").click();
 
         cy.contains(validationMessage.email.match);
         cy.contains(validationMessage.password.match);
-        cy.contains(validationMessage.passwordConfirm.match);
+        cy.contains(validationMessage.passwordVerified.match);
         cy.contains(validationMessage.name.match);
         cy.contains(validationMessage.phoneNumber.match);
         cy.get("@api").should("eq", null);
@@ -123,7 +123,7 @@ describe("sign up", () => {
         const validTypedValue = {
           email: "abcd@gmail.com",
           password: "1234abcd!",
-          passwordConfirm: "1234abcd!",
+          passwordVerified: "1234abcd!",
           name: "가나다라마",
           phoneNumber: "01012345678",
         };
@@ -141,7 +141,7 @@ describe("sign up", () => {
         cy.contains("회원가입").click();
         cy.contains("이메일").closest(".field").find("input").type(validTypedValue.email);
         cy.contains("비밀번호").closest(".field").find("input").type(validTypedValue.password);
-        cy.contains("비밀번호 확인").closest(".field").find("input").type(validTypedValue.passwordConfirm);
+        cy.contains("비밀번호 확인").closest(".field").find("input").type(validTypedValue.passwordVerified);
         cy.contains("이름").closest(".field").find("input").type(validTypedValue.name);
         cy.contains("휴대폰 번호").closest(".field").find("input").type(validTypedValue.phoneNumber);
         cy.contains("전체 약관 동의").click();

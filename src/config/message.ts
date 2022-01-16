@@ -7,7 +7,7 @@ export const validationMessage = {
     required: "비밀번호를 입력해주세요.",
     match: "비밀번호는 영문(대소문자 구분)/숫자/특수문자 포함 8자 이상입니다.",
   },
-  passwordConfirm: {
+  passwordVerified: {
     required: "비밀번호를 확인해주세요.",
     match: "비밀번호가 일치하지 않습니다.",
   },
