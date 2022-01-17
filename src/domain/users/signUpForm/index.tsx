@@ -134,7 +134,15 @@ function SignUpForm({ size, open, handleClose, handleSignInFormOpen, handleSnack
             fullWidth
           />
           <Field type="text" name="name" label="이름" variant="standard" color="secondary" fullWidth />
-          <Field type="text" name="phoneNumber" label="휴대폰 번호" variant="standard" color="secondary" fullWidth />
+          <Field
+            type="text"
+            name="phoneNumber"
+            label="휴대폰 번호"
+            placeholder="'-'을 빼고 기입해주세요."
+            variant="standard"
+            color="secondary"
+            fullWidth
+          />
           <CheckboxField
             name="agree"
             color="secondary"
