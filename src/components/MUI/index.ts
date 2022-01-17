@@ -1,5 +1,7 @@
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import Select from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
 import Popper from "@mui/material/Popper";
 import Paper from "@mui/material/Paper";
 import MenuItem from "@mui/material/MenuItem";
@@ -20,6 +22,8 @@ import DatePicker from "@mui/lab/DatePicker";
 export {
   Button,
   TextField,
+  Select,
+  InputLabel,
   Popper,
   Paper,
   MenuItem,
