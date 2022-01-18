@@ -1,8 +1,8 @@
 import { useField, useFormikContext } from "formik";
 import { cloneDeep, omit } from "lodash";
 
-import { Select, MenuItem, InputLabel } from "src/components/MUI";
-import { FormControl } from "src/components/MUI/api";
+import { Select, MenuItem } from "src/components/MUI";
+import { FormControl, InputLabel } from "src/components/MUI/api";
 import StyledErrorMessage from "src/components/form/shared/ErrorMessage.styled";
 
 type Option = {
@@ -12,16 +12,18 @@ type Option = {
 };
 
 function SelectField(props: any) {
-  const { label, labelId, options, handleChange } = props;
+  const { label, labelId, size, options, handleChange } = props;
   const [field, meta] = useField(props);
   const { isSubmitting, values, setValues, validateForm } = useFormikContext();
 
   return (
     // issue: FormControl api 인데 UI랑 종속성을 가짐... 없으면 라벨이 셀렉트 안에 안들어감..
-    <FormControl className="select-field" color={props.color}>
-      <InputLabel id={labelId}>{label}</InputLabel>
+    <FormControl className="select-field" color={props.color} style={{ margin: 8 }}>
+      <InputLabel id={labelId} sx={{ top: size === "small" ? "-6px" : 0, "&[data-shrink='true']": { top: 0 } }}>
+        {label}
+      </InputLabel>
       <Select
-        sx={{ width: 120 }}
+        sx={{ minWidth: 120 }}
         labelId={labelId}
         {...field}
         {...omit(cloneDeep(props), ["options", "handleChange"])}

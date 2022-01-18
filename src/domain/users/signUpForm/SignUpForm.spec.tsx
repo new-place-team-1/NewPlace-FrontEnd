@@ -38,6 +38,8 @@ describe("SignUpForm", () => {
     cy.get("input[name='passwordVerified']");
     cy.get("input[name='name']");
     cy.get("input[name='phoneNumber']");
+    cy.get("input[name='bankId']");
+    cy.get("input[name='accountNumber']");
     cy.get("input[name='agree']");
     cy.get("input[type='checkbox']").should("have.length", 3);
     cy.get("button").contains("계속");

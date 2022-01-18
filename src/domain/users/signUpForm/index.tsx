@@ -6,12 +6,14 @@ import Swal from "sweetalert2";
 import { StyledBox } from "./SignUpForm.styled";
 import { validationMessage, alertMessage } from "src/config/message";
 import regExp from "src/config/regExp";
+import { bankSelectOptions } from "src/config/banks";
 import { signUp } from "src/services/users";
 import { Typography, Paper, Button } from "src/components/MUI";
 import CustomModal, { ModalSize } from "src/components/MUI/customs/modal";
 import CustomForm from "src/components/form";
 import Field from "src/components/form/field";
 import CheckboxField from "src/components/form/checkboxField";
+import SelectField from "src/components/form/selectField";
 
 interface IProps {
   size: ModalSize;
@@ -31,6 +33,8 @@ function SignUpForm({ size, open, handleClose, handleSignInFormOpen, handleSnack
       passwordVerified: "",
       name: "",
       phoneNumber: "",
+      bankId: "",
+      accountNumber: "",
       agree: false,
       agreeContact: false,
       agreePolicy: false,
@@ -140,6 +144,24 @@ function SignUpForm({ size, open, handleClose, handleSignInFormOpen, handleSnack
             label="휴대폰 번호"
             placeholder="'-'을 빼고 기입해주세요."
             variant="standard"
+            color="secondary"
+            fullWidth
+          />
+          <SelectField
+            size="small"
+            color="secondary"
+            name="bankId"
+            label="은행명 (선택 사항)"
+            labelId="bankId-label"
+            options={bankSelectOptions}
+            sx={{ alignSelf: "start", width: 220 }}
+          />
+          <Field
+            size="small"
+            type="text"
+            name="accountNumber"
+            label="계좌 번호 (선택 사항)"
+            placeholder="'-'을 빼고 기입해주세요."
             color="secondary"
             fullWidth
           />

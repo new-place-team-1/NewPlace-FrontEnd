@@ -120,12 +120,14 @@ describe("sign up", () => {
 
     describe("submit", () => {
       it("When type proper values and click submit button, Then not show validation error message and submit successfully and change modal with LogInForm Modal", () => {
-        const validTypedValue = {
+        const validValue = {
           email: "abcd@gmail.com",
           password: "1234abcd!",
           passwordVerified: "1234abcd!",
           name: "가나다라마",
           phoneNumber: "01012345678",
+          bankId: "",
+          accountNumber: "",
         };
 
         cy.intercept("post", USERS.INDEX, req => {
@@ -139,11 +141,11 @@ describe("sign up", () => {
         }).as("api");
 
         cy.contains("회원가입").click();
-        cy.contains("이메일").closest(".field").find("input").type(validTypedValue.email);
-        cy.contains("비밀번호").closest(".field").find("input").type(validTypedValue.password);
-        cy.contains("비밀번호 확인").closest(".field").find("input").type(validTypedValue.passwordVerified);
-        cy.contains("이름").closest(".field").find("input").type(validTypedValue.name);
-        cy.contains("휴대폰 번호").closest(".field").find("input").type(validTypedValue.phoneNumber);
+        cy.contains("이메일").closest(".field").find("input").type(validValue.email);
+        cy.contains("비밀번호").closest(".field").find("input").type(validValue.password);
+        cy.contains("비밀번호 확인").closest(".field").find("input").type(validValue.passwordVerified);
+        cy.contains("이름").closest(".field").find("input").type(validValue.name);
+        cy.contains("휴대폰 번호").closest(".field").find("input").type(validValue.phoneNumber);
         cy.contains("전체 약관 동의").click();
         cy.contains("계속").click();
 
@@ -153,11 +155,55 @@ describe("sign up", () => {
             request: { body },
           } = interception;
 
-          expect(body).to.deep.equal(validTypedValue);
+          expect(body).to.deep.equal(validValue);
         });
         cy.contains("회원가입에 성공했습니다.").should("exist");
         cy.get("#sign-in-form").should("exist");
         cy.get("#sign-up-form").should("not.exist");
+      });
+
+      it("When type proper values including optional field and click submit button, Then submit successfully", () => {
+        const validValue = {
+          email: "abcd@gmail.com",
+          password: "1234abcd!",
+          passwordVerified: "1234abcd!",
+          name: "가나다라마",
+          phoneNumber: "01012345678",
+          bankId: "0",
+          accountNumber: "1234567",
+        };
+
+        cy.intercept("post", USERS.INDEX, req => {
+          req.reply({
+            statusCode: 201,
+            body: {
+              data: "OK",
+            },
+            delay: 1000,
+          });
+        }).as("api");
+
+        cy.contains("회원가입").click();
+        cy.contains("이메일").closest(".field").find("input").type(validValue.email);
+        cy.contains("비밀번호").closest(".field").find("input").type(validValue.password);
+        cy.contains("비밀번호 확인").closest(".field").find("input").type(validValue.passwordVerified);
+        cy.contains("이름").closest(".field").find("input").type(validValue.name);
+        cy.contains("휴대폰 번호").closest(".field").find("input").type(validValue.phoneNumber);
+        cy.contains("은행명 (선택 사항)").closest(".select-field").click();
+        cy.contains("하나").click();
+        cy.contains("계좌 번호").closest(".field").find("input").type(validValue.accountNumber);
+        cy.contains("전체 약관 동의").click();
+        cy.contains("계속").click();
+
+        cy.get(".error").should("have.length", 0);
+        cy.wait("@api").then(interception => {
+          const {
+            request: { body },
+          } = interception;
+
+          expect(body).to.deep.equal(validValue);
+        });
+        cy.contains("회원가입에 성공했습니다.").should("exist");
       });
     });
   });

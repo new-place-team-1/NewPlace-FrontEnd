@@ -4,6 +4,8 @@ interface ISignUpFormValues {
   passwordVerified: string;
   name: string;
   phoneNumber: string;
+  bankId: string;
+  accountNumber: string;
   agree: boolean;
   agreeContact: boolean;
   agreePolicy: boolean;
@@ -14,6 +16,8 @@ interface ISignUpRequestPayload {
   passwordVerified: string;
   name: string;
   phoneNumber: string;
+  bankId?: string;
+  accountNumber?: string;
 }
 
 interface ISignInFormValues {
