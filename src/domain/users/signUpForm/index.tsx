@@ -19,13 +19,12 @@ interface IProps {
   size: ModalSize;
   open: boolean;
   handleClose: () => void;
-  handleSignInFormOpen: () => void;
-  handleSnackbarOpen: (message: string) => void;
 }
 
-function SignUpForm({ size, open, handleClose, handleSignInFormOpen, handleSnackbarOpen }: IProps) {
+function SignUpForm({ size, open, handleClose }: IProps) {
   const [agreeContact, setAgreeContact] = useState<boolean>(false);
   const [agreePolicy, setAgreePolicy] = useState<boolean>(false);
+  const [showWaitMessage, setShowWaitMessage] = useState<boolean>(false);
   const initialValues: ISignUpFormValues = useMemo(() => {
     return {
       email: "",
@@ -59,9 +58,7 @@ function SignUpForm({ size, open, handleClose, handleSignInFormOpen, handleSnack
     (values: ISignUpFormValues, actions) =>
       signUp(omit(values, ["agree", "agreeContact", "agreePolicy"]))
         .then(() => {
-          handleSignInFormOpen();
-          handleClose();
-          handleSnackbarOpen(alertMessage.signUp.success.text);
+          setShowWaitMessage(true);
         })
         .catch(() => {
           actions.resetForm({
@@ -73,7 +70,7 @@ function SignUpForm({ size, open, handleClose, handleSignInFormOpen, handleSnack
             text: alertMessage.signUp.error.text,
           });
         }),
-    [handleClose, handleSignInFormOpen, handleSnackbarOpen, initialValues],
+    [initialValues],
   );
 
   const handleAgreeContactChange = useCallback((event, values: ISignUpFormValues, setValues) => {
@@ -118,80 +115,94 @@ function SignUpForm({ size, open, handleClose, handleSignInFormOpen, handleSnack
   return (
     <CustomModal id="sign-up-form" open={open} onClose={handleClose} size={size}>
       <Paper elevation={2} sx={paperStyle}>
-        <CustomForm
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          handleSubmit={handleSubmit}
-          style={{ display: "flex", flexDirection: "column" }}
-        >
-          <Typography variant="h2" component="h2" sx={{ marginBottom: 1 }}>
-            회원가입
-          </Typography>
-          <Field type="email" name="email" label="이메일" variant="standard" color="secondary" fullWidth />
-          <Field type="password" name="password" label="비밀번호" variant="standard" color="secondary" fullWidth />
-          <Field
-            type="password"
-            name="passwordVerified"
-            label="비밀번호 확인"
-            variant="standard"
-            color="secondary"
-            fullWidth
-          />
-          <Field type="text" name="name" label="이름" variant="standard" color="secondary" fullWidth />
-          <Field
-            type="text"
-            name="phoneNumber"
-            label="휴대폰 번호"
-            placeholder="'-'을 빼고 기입해주세요."
-            variant="standard"
-            color="secondary"
-            fullWidth
-          />
-          <SelectField
-            size="small"
-            color="secondary"
-            name="bankId"
-            label="은행명 (선택 사항)"
-            labelId="bankId-label"
-            options={bankSelectOptions}
-            sx={{ alignSelf: "start", width: 220 }}
-          />
-          <Field
-            size="small"
-            type="text"
-            name="accountNumber"
-            label="계좌 번호 (선택 사항)"
-            placeholder="'-'을 빼고 기입해주세요."
-            color="secondary"
-            fullWidth
-          />
-          <CheckboxField
-            name="agree"
-            color="secondary"
-            label="전체 약관 동의"
-            checked={agreeContact && agreePolicy}
-            handleChange={handleAgreeAllChange}
-          />
-          <StyledBox>
-            <CheckboxField
-              name="agreeContact"
+        {showWaitMessage ? (
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <Typography variant="h2" component="h2" sx={{ marginBottom: 1 }}>
+              이메일 인증
+            </Typography>
+            <Typography sx={{ margin: 1 }}>
+              인증 이메일이 발송되었습니다. 이메일 인증을 하면 회원가입이 완료됩니다.
+            </Typography>
+            <Button type="button" variant="contained" sx={{ alignSelf: "center", marginTop: 1 }} onClick={handleClose}>
+              확인
+            </Button>
+          </div>
+        ) : (
+          <CustomForm
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            handleSubmit={handleSubmit}
+            style={{ display: "flex", flexDirection: "column" }}
+          >
+            <Typography variant="h2" component="h2" sx={{ marginBottom: 1 }}>
+              회원가입
+            </Typography>
+            <Field type="email" name="email" label="이메일" variant="standard" color="secondary" fullWidth />
+            <Field type="password" name="password" label="비밀번호" variant="standard" color="secondary" fullWidth />
+            <Field
+              type="password"
+              name="passwordVerified"
+              label="비밀번호 확인"
+              variant="standard"
               color="secondary"
-              label="회원 가입 및 운영 약관 동의 (필수)"
-              checked={agreeContact}
-              handleChange={handleAgreeContactChange}
+              fullWidth
+            />
+            <Field type="text" name="name" label="이름" variant="standard" color="secondary" fullWidth />
+            <Field
+              type="text"
+              name="phoneNumber"
+              label="휴대폰 번호"
+              placeholder="'-'을 빼고 기입해주세요."
+              variant="standard"
+              color="secondary"
+              fullWidth
+            />
+            <SelectField
+              size="small"
+              color="secondary"
+              name="bankId"
+              label="은행명 (선택 사항)"
+              labelId="bankId-label"
+              options={bankSelectOptions}
+              sx={{ alignSelf: "start", width: 220 }}
+            />
+            <Field
+              size="small"
+              type="text"
+              name="accountNumber"
+              label="계좌 번호 (선택 사항)"
+              placeholder="'-'을 빼고 기입해주세요."
+              color="secondary"
+              fullWidth
             />
             <CheckboxField
-              name="agreePolicy"
+              name="agree"
               color="secondary"
-              label="개인정보 처리방침 동의 (필수)"
-              checked={agreePolicy}
-              handleChange={handleAgreePolicyChange}
+              label="전체 약관 동의"
+              checked={agreeContact && agreePolicy}
+              handleChange={handleAgreeAllChange}
             />
-          </StyledBox>
-          <Button type="submit" variant="contained" sx={{ alignSelf: "center", marginTop: 1 }}>
-            계속
-          </Button>
-        </CustomForm>
+            <StyledBox>
+              <CheckboxField
+                name="agreeContact"
+                color="secondary"
+                label="회원 가입 및 운영 약관 동의 (필수)"
+                checked={agreeContact}
+                handleChange={handleAgreeContactChange}
+              />
+              <CheckboxField
+                name="agreePolicy"
+                color="secondary"
+                label="개인정보 처리방침 동의 (필수)"
+                checked={agreePolicy}
+                handleChange={handleAgreePolicyChange}
+              />
+            </StyledBox>
+            <Button type="submit" variant="contained" sx={{ alignSelf: "center", marginTop: 1 }}>
+              계속
+            </Button>
+          </CustomForm>
+        )}
       </Paper>
     </CustomModal>
   );

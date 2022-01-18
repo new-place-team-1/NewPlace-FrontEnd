@@ -119,7 +119,7 @@ describe("sign up", () => {
     });
 
     describe("submit", () => {
-      it("When type proper values and click submit button, Then not show validation error message and submit successfully and change modal with LogInForm Modal", () => {
+      it("When type proper values and click submit button, Then not show validation error message and submit successfully and show wait message", () => {
         const validValue = {
           email: "abcd@gmail.com",
           password: "1234abcd!",
@@ -157,9 +157,7 @@ describe("sign up", () => {
 
           expect(body).to.deep.equal(validValue);
         });
-        cy.contains("회원가입에 성공했습니다.").should("exist");
-        cy.get("#sign-in-form").should("exist");
-        cy.get("#sign-up-form").should("not.exist");
+        cy.contains("인증 이메일이 발송되었습니다. 이메일 인증을 하면 회원가입이 완료됩니다.").should("exist");
       });
 
       it("When type proper values including optional field and click submit button, Then submit successfully", () => {
@@ -203,7 +201,7 @@ describe("sign up", () => {
 
           expect(body).to.deep.equal(validValue);
         });
-        cy.contains("회원가입에 성공했습니다.").should("exist");
+        cy.contains("인증 이메일이 발송되었습니다. 이메일 인증을 하면 회원가입이 완료됩니다.").should("exist");
       });
     });
   });

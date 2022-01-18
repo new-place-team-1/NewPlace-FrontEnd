@@ -55,8 +55,6 @@ function Layout() {
       <SignUpForm
         open={isSignUpFormModalOpen}
         handleClose={handleSignUpFormClose}
-        handleSignInFormOpen={handleSignInFormOpen}
-        handleSnackbarOpen={handleSnackbarOpen}
         size={isDesktopsize ? "medium" : "small"}
       />
       <SignInForm
