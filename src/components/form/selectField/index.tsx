@@ -17,10 +17,8 @@ function SelectField(props: any) {
 
   return (
     // issue: FormControl api 인데 UI랑 종속성을 가짐... 없으면 라벨이 셀렉트 안에 안들어감..
-    <FormControl className="select-field" color={color} style={{ margin: 8 }}>
-      <InputLabel id={labelId} sx={{ top: size === "small" ? "-6px" : 0, "&[data-shrink='true']": { top: 0 } }}>
-        {label}
-      </InputLabel>
+    <FormControl className="select-field" size={size} color={color} style={{ margin: 8 }}>
+      <InputLabel id={labelId}>{label}</InputLabel>
       <Select
         sx={{ minWidth: 120 }}
         labelId={labelId}
