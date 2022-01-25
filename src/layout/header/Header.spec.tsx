@@ -10,6 +10,7 @@ describe("Header", () => {
     this.props = {
       handleSignUpFormOpen: cy.stub().as("handleSignUpFormOpen"),
     };
+
     mount(
       <ThemeProvider theme={theme}>
         <Header {...this.props} />

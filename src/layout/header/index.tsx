@@ -1,11 +1,11 @@
 import { Fragment } from "react";
 import { useMediaQuery } from "react-responsive";
 
+import { StyledMobileHeader, StyledDesktopHeader } from "./Header.styled";
 import { sizeBoundary } from "src/config/device";
 import { ReactComponent as Logo } from "src/assets/images/logo.svg";
 import { Button } from "src/components/MUI";
 import { AccountCircle, ArrowBack } from "src/components/MUI/icons";
-import { StyledMobileHeader, StyledDesktopHeader } from "./Header.styled";
 
 function MobileHeader() {
   return (
