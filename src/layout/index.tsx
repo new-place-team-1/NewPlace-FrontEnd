@@ -3,6 +3,7 @@ import { useMediaQuery } from "react-responsive";
 
 import { sizeBoundary } from "src/config/device";
 import Header from "src/layout/header";
+import Footer from "src/layout/footer";
 import BottomMenu from "src/layout/bottomMenu";
 import SignUpForm from "src/domain/users/signUpForm";
 import SignInForm from "src/domain/users/signInForm";
@@ -49,6 +50,7 @@ function Layout() {
   return (
     <Fragment>
       <Header handleSignUpFormOpen={handleSignUpFormOpen} handleSignInFormOpen={handleSignInFormOpen} />
+      <Footer />
       {!isDesktopsize && (
         <BottomMenu handleSignUpFormOpen={handleSignUpFormOpen} handleSignInFormOpen={handleSignInFormOpen} />
       )}

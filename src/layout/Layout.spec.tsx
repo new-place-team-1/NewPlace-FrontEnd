@@ -4,12 +4,13 @@ import Layout from ".";
 import { viewportSizeForTest } from "src/config/device";
 
 describe("Layout", () => {
-  it("Render header", () => {
+  it("Render header, footer", () => {
     cy.viewport(viewportSizeForTest.mobile.width, viewportSizeForTest.mobile.height);
 
     mount(<Layout />);
 
     cy.get("header").should("exist");
+    cy.get("footer").should("exist");
   });
 
   it("When viewport width <= 992, Then render BottomMenu", () => {
