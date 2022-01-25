@@ -15,8 +15,21 @@ const StyledFooter = styled.footer`
   position: fixed;
   bottom: ${({ isDesktopsize }: IProps) => (isDesktopsize ? 0 : `${bottomMenuHeight}px`)};
 
-  p {
+  p,
+  a,
+  a:visited,
+  a:active {
     color: ${palette.font.lightRed};
+  }
+
+  nav {
+    text-align: center;
+    margin-bottom: ${({ isDesktopsize }: IProps) => (isDesktopsize ? "6px" : "2px")};
+
+    a {
+      margin: 0 ${({ isDesktopsize }: IProps) => (isDesktopsize ? "35px" : "7px")};
+      font-size: 14px;
+    }
   }
 `;
 

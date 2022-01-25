@@ -1,5 +1,6 @@
 import { Typography } from "@mui/material";
 import { useMediaQuery } from "react-responsive";
+import { Link } from "react-router-dom";
 
 import StyledFooter from "./Footer.styled";
 import { sizeBoundary } from "src/config/device";
@@ -11,6 +12,11 @@ function Footer() {
 
   return (
     <StyledFooter isDesktopsize={isDesktopsize}>
+      <nav>
+        <Link to="/policy/contract">이용약관</Link>
+        <Link to="/policy/privacy">개인정보 처리방침</Link>
+        <Link to="/policy/cancellation">취소 및 환불 정책</Link>
+      </nav>
       <address>
         <Typography variant="caption" component="p">
           상호명 (주)굿플레이스 | 대표 강보람 | 개인정보보호책임자 채희영 |사업자등록번호 209-81-55339 사업자정보확인
