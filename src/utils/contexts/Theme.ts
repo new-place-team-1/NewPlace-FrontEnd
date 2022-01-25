@@ -23,13 +23,14 @@ const theme = responsiveFontSizes(
       },
     },
     typography: {
+      fontFamily: "'Noto Sans KR', sans-serif",
       h2: {
-        fontSize: "1.8rem",
+        fontSize: "2rem",
         textAlign: "center",
         fontWeight: "bold",
       },
       caption: {
-        fontSize: 12,
+        fontSize: "0.8rem",
       },
     },
     components: {
