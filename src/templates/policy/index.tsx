@@ -5,7 +5,7 @@ import { isNil } from "lodash";
 import Contract from "./Contract";
 import Privacy from "./Privacy";
 import Cancellation from "./Cancellation";
-import RadioTabs from "src/components/MUI/customs/radioTabs";
+import RadioTabs from "src/UI/MUI/customs/radioTabs";
 
 function Policy() {
   const navigate = useNavigate();

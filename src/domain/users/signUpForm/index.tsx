@@ -8,12 +8,12 @@ import { validationMessage, alertMessage } from "src/config/message";
 import regExp from "src/config/regExp";
 import { bankSelectOptions } from "src/config/banks";
 import { signUp } from "src/services/users";
-import { Typography, Paper, Button } from "src/components/MUI";
-import CustomModal, { ModalSize } from "src/components/MUI/customs/modal";
-import CustomForm from "src/components/form";
-import Field from "src/components/form/field";
-import CheckboxField from "src/components/form/checkboxField";
-import SelectField from "src/components/form/selectField";
+import { Typography, Paper, Button } from "src/UI/MUI";
+import CustomModal, { ModalSize } from "src/UI/MUI/customs/modal";
+import CustomForm from "src/UI/form";
+import Field from "src/UI/form/field";
+import CheckboxField from "src/UI/form/checkboxField";
+import SelectField from "src/UI/form/selectField";
 
 interface IProps {
   size: ModalSize;

@@ -5,8 +5,8 @@ import AdapterDayjs from "@mui/lab/AdapterDayjs";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 
 import DateField from ".";
-import { DateRange } from "src/components/MUI/icons";
-import { InputAdornment } from "src/components/MUI/api";
+import { DateRange } from "src/UI/MUI/icons";
+import { InputAdornment } from "src/UI/MUI/api";
 import theme from "src/utils/contexts/Theme";
 
 describe("DateField", () => {

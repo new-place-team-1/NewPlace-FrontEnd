@@ -7,7 +7,7 @@ import Footer from "src/layout/footer";
 import BottomMenu from "src/layout/bottomMenu";
 import SignUpForm from "src/domain/users/signUpForm";
 import SignInForm from "src/domain/users/signInForm";
-import { Snackbar, Alert } from "src/components/MUI";
+import { Snackbar, Alert } from "src/UI/MUI";
 
 function Layout() {
   const [isSignUpFormModalOpen, setIsSignUpFormModalOpen] = useState<boolean>(false);

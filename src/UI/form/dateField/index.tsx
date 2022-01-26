@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useField, useFormikContext } from "formik";
 import dayjs from "dayjs";
 
-import { DatePicker, TextField } from "src/components/MUI";
-import StyledErrorMessage from "src/components/form/shared/ErrorMessage.styled";
+import { DatePicker, TextField } from "src/UI/MUI";
+import StyledErrorMessage from "src/UI/form/shared/ErrorMessage.styled";
 
 interface IProps {
   label: string;

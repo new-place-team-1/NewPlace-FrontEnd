@@ -5,10 +5,10 @@ import Swal from "sweetalert2";
 import regExp from "src/config/regExp";
 import { validationMessage, alertMessage } from "src/config/message";
 import { signIn } from "src/services/users";
-import { Typography, Paper, Button } from "src/components/MUI";
-import CustomModal, { ModalSize } from "src/components/MUI/customs/modal";
-import CustomForm from "src/components/form";
-import Field from "src/components/form/field";
+import { Typography, Paper, Button } from "src/UI/MUI";
+import CustomModal, { ModalSize } from "src/UI/MUI/customs/modal";
+import CustomForm from "src/UI/form";
+import Field from "src/UI/form/field";
 
 interface IProps {
   size: ModalSize;

@@ -1,4 +1,4 @@
-import { CircularProgress } from "src/components/MUI";
+import { CircularProgress } from "src/UI/MUI";
 
 function Spinner() {
   return (

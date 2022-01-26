@@ -1,4 +1,4 @@
-import { Tab, Tabs } from "src/components/MUI";
+import { Tab, Tabs } from "src/UI/MUI";
 
 type TabProps = {
   label: string;

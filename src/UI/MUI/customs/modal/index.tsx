@@ -1,4 +1,4 @@
-import { Modal, Paper } from "src/components/MUI";
+import { Modal, Paper } from "src/UI/MUI";
 
 export type ModalSize = "small" | "medium" | "large";
 

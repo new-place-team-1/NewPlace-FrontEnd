@@ -1,7 +1,7 @@
 import { useField, useFormikContext } from "formik";
 
-import { TextField } from "src/components/MUI";
-import StyledErrorMessage from "src/components/form/shared/ErrorMessage.styled";
+import { TextField } from "src/UI/MUI";
+import StyledErrorMessage from "src/UI/form/shared/ErrorMessage.styled";
 
 function Field(props: any) {
   const { handleChange, ...otherProps } = props;
