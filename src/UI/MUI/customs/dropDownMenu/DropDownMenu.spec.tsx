@@ -2,7 +2,7 @@ import { mount } from "@cypress/react";
 import { ThemeProvider } from "@mui/material/styles";
 
 import DropDownMenu from ".";
-import { AccountCircle } from "src/components/MUI/icons";
+import { AccountCircle } from "src/UI/MUI/icons";
 import theme from "src/utils/contexts/Theme";
 
 describe("DropDownMenu", () => {

@@ -1,7 +1,7 @@
 import { useField, useFormikContext } from "formik";
 
-import { Checkbox, Typography } from "src/components/MUI";
-import StyledErrorMessage from "src/components/form/shared/ErrorMessage.styled";
+import { Checkbox, Typography } from "src/UI/MUI";
+import StyledErrorMessage from "src/UI/form/shared/ErrorMessage.styled";
 
 function CheckboxField(props: any) {
   const { label, handleChange, ...otherProps } = props;

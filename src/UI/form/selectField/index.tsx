@@ -1,8 +1,8 @@
 import { useField, useFormikContext } from "formik";
 
-import { Select, MenuItem } from "src/components/MUI";
-import { FormControl, InputLabel } from "src/components/MUI/api";
-import StyledErrorMessage from "src/components/form/shared/ErrorMessage.styled";
+import { Select, MenuItem } from "src/UI/MUI";
+import { FormControl, InputLabel } from "src/UI/MUI/api";
+import StyledErrorMessage from "src/UI/form/shared/ErrorMessage.styled";
 
 type Option = {
   id: string;

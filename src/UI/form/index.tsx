@@ -2,7 +2,7 @@ import { Formik, Form } from "formik";
 import { useCallback } from "react";
 
 import { isDevelopmentMode } from "src/utils/lib/is";
-import Spinner from "src/components/MUI/customs/spinner";
+import Spinner from "src/UI/MUI/customs/spinner";
 
 interface IProps {
   initialValues: object;

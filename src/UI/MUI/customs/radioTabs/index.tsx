@@ -1,6 +1,4 @@
-import { useState } from "react";
-
-import { Tab, Tabs } from "src/components/MUI";
+import { Tab, Tabs } from "src/UI/MUI";
 
 type TabProps = {
   label: string;
@@ -8,15 +6,13 @@ type TabProps = {
 };
 
 interface IProps {
+  tabIndex: number;
   tabsProps: Array<TabProps>;
-  onChange: (tabIndex: number) => void;
+  onChange: (newIndex: number) => void;
 }
 
-function RadioTabs({ tabsProps, onChange }: IProps) {
-  const [tabIndex, setTabIndex] = useState<number>(0);
-
+function RadioTabs({ tabIndex, tabsProps, onChange }: IProps) {
   const handleChange = (event: React.SyntheticEvent, newIndex: number) => {
-    setTabIndex(newIndex);
     onChange(newIndex);
   };
 

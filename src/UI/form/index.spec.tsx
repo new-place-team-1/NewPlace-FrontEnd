@@ -3,9 +3,9 @@ import * as Yup from "yup";
 import { ThemeProvider } from "@mui/material/styles";
 
 import CustomForm from ".";
-import Field from "src/components/form/field";
-import CheckboxField from "src/components/form/checkboxField";
-import { Button } from "src/components/MUI";
+import Field from "src/UI/form/field";
+import CheckboxField from "src/UI/form/checkboxField";
+import { Button } from "src/UI/MUI";
 import theme from "src/utils/contexts/Theme";
 
 describe("CustomForm", () => {
