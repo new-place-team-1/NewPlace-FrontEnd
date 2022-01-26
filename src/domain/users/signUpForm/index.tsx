@@ -1,19 +1,24 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, Fragment } from "react";
 import * as Yup from "yup";
 import { omit } from "lodash";
 import Swal from "sweetalert2";
 
-import { StyledBox } from "./SignUpForm.styled";
+import { StyledBox, StyledBoxItem, StyledModalHeader } from "./SignUpForm.styled";
 import { validationMessage, alertMessage } from "src/config/message";
 import regExp from "src/config/regExp";
 import { bankSelectOptions } from "src/config/banks";
 import { signUp } from "src/services/users";
 import { Typography, Paper, Button } from "src/UI/MUI";
+import { Description, ArrowBack } from "src/UI/MUI/icons";
 import CustomModal, { ModalSize } from "src/UI/MUI/customs/modal";
 import CustomForm from "src/UI/form";
 import Field from "src/UI/form/field";
 import CheckboxField from "src/UI/form/checkboxField";
 import SelectField from "src/UI/form/selectField";
+import Contract from "src/templates/policy/Contract";
+import Privacy from "src/templates/policy/Privacy";
+
+type ModalContent = "index" | "waitAuth" | "policyContract" | "policyPrivacy";
 
 interface IProps {
   size: ModalSize;
@@ -24,7 +29,7 @@ interface IProps {
 function SignUpForm({ size, open, handleClose }: IProps) {
   const [agreeContact, setAgreeContact] = useState<boolean>(false);
   const [agreePolicy, setAgreePolicy] = useState<boolean>(false);
-  const [showWaitMessage, setShowWaitMessage] = useState<boolean>(false);
+  const [modalContent, setModalContent] = useState<ModalContent>("index");
   const initialValues: ISignUpFormValues = useMemo(() => {
     return {
       email: "",
@@ -58,7 +63,7 @@ function SignUpForm({ size, open, handleClose }: IProps) {
     (values: ISignUpFormValues, actions) =>
       signUp(omit(values, ["agree", "agreeContact", "agreePolicy"]))
         .then(() => {
-          setShowWaitMessage(true);
+          setModalContent("waitAuth");
         })
         .catch(() => {
           actions.resetForm({
@@ -108,33 +113,34 @@ function SignUpForm({ size, open, handleClose }: IProps) {
     setAgreePolicy(checked);
   }, []);
 
-  const paperStyle = {
-    padding: size === "small" ? 2 : 6,
+  const moveToContract = () => {
+    setModalContent("policyContract");
+  };
+
+  const moveToPrivacy = () => {
+    setModalContent("policyPrivacy");
+  };
+
+  const moveToIndex = () => {
+    setModalContent("index");
   };
 
   return (
     <CustomModal id="sign-up-form" open={open} onClose={handleClose} size={size}>
-      <Paper elevation={2} sx={paperStyle}>
-        {showWaitMessage ? (
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <Typography variant="h2" component="h2" sx={{ marginBottom: 1 }}>
-              이메일 인증
-            </Typography>
-            <Typography sx={{ margin: 1 }}>
-              인증 이메일이 발송되었습니다. 이메일 인증을 하면 회원가입이 완료됩니다.
-            </Typography>
-            <Button type="button" variant="contained" sx={{ alignSelf: "center", marginTop: 1 }} onClick={handleClose}>
-              확인
-            </Button>
-          </div>
-        ) : (
+      <Paper
+        elevation={2}
+        sx={{
+          padding: size === "small" ? 2 : 6,
+        }}
+      >
+        {modalContent === "index" && (
           <CustomForm
             initialValues={initialValues}
             validationSchema={validationSchema}
             handleSubmit={handleSubmit}
             style={{ display: "flex", flexDirection: "column" }}
           >
-            <Typography variant="h2" component="h2" sx={{ marginBottom: 1 }}>
+            <Typography variant="h2" component="h2">
               회원가입
             </Typography>
             <Field type="email" name="email" label="이메일" variant="standard" color="secondary" fullWidth />
@@ -183,25 +189,68 @@ function SignUpForm({ size, open, handleClose }: IProps) {
               handleChange={handleAgreeAllChange}
             />
             <StyledBox>
-              <CheckboxField
-                name="agreeContact"
-                color="secondary"
-                label="회원 가입 및 운영 약관 동의 (필수)"
-                checked={agreeContact}
-                handleChange={handleAgreeContactChange}
-              />
-              <CheckboxField
-                name="agreePolicy"
-                color="secondary"
-                label="개인정보 처리방침 동의 (필수)"
-                checked={agreePolicy}
-                handleChange={handleAgreePolicyChange}
-              />
+              <StyledBoxItem>
+                <CheckboxField
+                  name="agreeContact"
+                  color="secondary"
+                  label="회원 가입 및 운영 약관 동의 (필수)"
+                  checked={agreeContact}
+                  handleChange={handleAgreeContactChange}
+                />
+                <Description color="secondary" fontSize="small" onClick={moveToContract} />
+              </StyledBoxItem>
+              <StyledBoxItem>
+                <CheckboxField
+                  name="agreePolicy"
+                  color="secondary"
+                  label="개인정보 처리방침 동의 (필수)"
+                  checked={agreePolicy}
+                  handleChange={handleAgreePolicyChange}
+                />
+                <Description color="secondary" fontSize="small" onClick={moveToPrivacy} />
+              </StyledBoxItem>
             </StyledBox>
             <Button type="submit" variant="contained" sx={{ alignSelf: "center", marginTop: 1 }}>
               계속
             </Button>
           </CustomForm>
+        )}
+        {modalContent === "waitAuth" && (
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <Typography variant="h2" component="h2">
+              이메일 인증
+            </Typography>
+            <Typography sx={{ margin: 1 }}>
+              인증 이메일이 발송되었습니다. 이메일 인증을 하면 회원가입이 완료됩니다.
+            </Typography>
+            <Button type="button" variant="contained" sx={{ alignSelf: "center", marginTop: 1 }} onClick={handleClose}>
+              확인
+            </Button>
+          </div>
+        )}
+        {modalContent === "policyContract" && (
+          <Fragment>
+            <StyledModalHeader>
+              <ArrowBack onClick={moveToIndex} />
+              <Typography variant="h2" component="h2">
+                이용약관
+              </Typography>
+              <div />
+            </StyledModalHeader>
+            <Contract />
+          </Fragment>
+        )}
+        {modalContent === "policyPrivacy" && (
+          <Fragment>
+            <StyledModalHeader>
+              <ArrowBack onClick={moveToIndex} />
+              <Typography variant="h2" component="h2">
+                개인정보 처리방침
+              </Typography>
+              <div />
+            </StyledModalHeader>
+            <Privacy />
+          </Fragment>
         )}
       </Paper>
     </CustomModal>

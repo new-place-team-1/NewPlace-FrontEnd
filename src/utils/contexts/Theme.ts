@@ -28,6 +28,7 @@ const theme = responsiveFontSizes(
         fontSize: "2rem",
         textAlign: "center",
         fontWeight: "bold",
+        marginBottom: 8,
       },
       caption: {
         fontSize: "0.8rem",

@@ -59,7 +59,7 @@ function SignInForm({ size, open, handleClose }: IProps) {
           handleSubmit={handleSubmit}
           style={{ display: "flex", flexDirection: "column" }}
         >
-          <Typography variant="h2" component="h2" sx={{ marginBottom: 1 }}>
+          <Typography variant="h2" component="h2">
             로그인
           </Typography>
           <Field type="email" name="email" label="이메일" variant="standard" color="secondary" fullWidth />

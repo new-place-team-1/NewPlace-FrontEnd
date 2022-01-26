@@ -1,5 +1,6 @@
 import { useField, useFormikContext } from "formik";
 
+import StyledCheckboxField from "./CheckboxField.styled";
 import { Checkbox, Typography } from "src/UI/MUI";
 import StyledErrorMessage from "src/UI/form/shared/ErrorMessage.styled";
 
@@ -9,7 +10,7 @@ function CheckboxField(props: any) {
   const { isSubmitting, values, setValues, validateForm } = useFormikContext();
 
   return (
-    <div className="checkbox-field">
+    <StyledCheckboxField className="checkbox-field">
       <label>
         <Checkbox
           {...field}
@@ -33,7 +34,7 @@ function CheckboxField(props: any) {
           {meta.error}
         </StyledErrorMessage>
       )}
-    </div>
+    </StyledCheckboxField>
   );
 }
 

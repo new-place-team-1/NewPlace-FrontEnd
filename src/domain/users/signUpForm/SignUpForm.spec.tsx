@@ -49,4 +49,40 @@ describe("SignUpForm", () => {
     cy.get("#sign-up-form").click(1, 1);
     cy.get("@handleClose").should("have.been.calledOnce");
   });
+
+  it("when click icon of contract, Then move to contract including arrow-back", function () {
+    cy.get("[data-testid='DescriptionIcon']").then($icons => {
+      const contractIcon = $icons[0];
+
+      cy.wrap(contractIcon).click();
+
+      cy.get("#policy-contract").should("exist");
+      cy.get("[data-testid='ArrowBackIcon']").should("exist");
+    });
+  });
+
+  it("when click icon of privacy, Then move to privacy including arrow-back", function () {
+    cy.get("[data-testid='DescriptionIcon']").then($icons => {
+      const contractIcon = $icons[1];
+
+      cy.wrap(contractIcon).click();
+
+      cy.get("#policy-privacy").should("exist");
+      cy.get("[data-testid='ArrowBackIcon']").should("exist");
+    });
+  });
+
+  it("Given policy content, When click back arrow icon, Then move to index", function () {
+    cy.get("[data-testid='DescriptionIcon']").then($icons => {
+      const contractIcon = $icons[0];
+
+      cy.wrap(contractIcon).click();
+    });
+
+    cy.get("[data-testid='ArrowBackIcon']").then($icons => {
+      cy.wrap($icons).click();
+
+      cy.get("form").should("exist");
+    });
+  });
 });
