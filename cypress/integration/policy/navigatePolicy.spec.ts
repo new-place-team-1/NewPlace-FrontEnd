@@ -64,6 +64,7 @@ describe.only("navigate policy", () => {
 
       cy.url().should("eq", `${HOST_URL}${contractPath}`);
       cy.get("@activeTab").should("have.css", "color", `${palette.primary.main}`);
+      cy.get("#policy-contract").should("exist");
     });
 
     it("When click 개인정보 처리방침 on nav in policy template, Then move to 개인정보 처리방침", () => {
@@ -73,6 +74,7 @@ describe.only("navigate policy", () => {
 
       cy.url().should("eq", `${HOST_URL}${privacyPath}`);
       cy.get("@activeTab").should("have.css", "color", `${palette.primary.main}`);
+      cy.get("#policy-privacy").should("exist");
     });
 
     it("When click 취소 및 환불 정책 on nav in policy template, Then move to 취소 및 환불 정책", () => {
@@ -82,6 +84,7 @@ describe.only("navigate policy", () => {
 
       cy.url().should("eq", `${HOST_URL}${cancellationPath}`);
       cy.get("@activeTab").should("have.css", "color", `${palette.primary.main}`);
+      cy.get("#policy-cancellation").should("exist");
     });
   });
 });

@@ -2,6 +2,9 @@ import { useEffect, useState, useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { isNil } from "lodash";
 
+import Contract from "./Contract";
+import Privacy from "./Privacy";
+import Cancellation from "./Cancellation";
 import RadioTabs from "src/components/MUI/customs/radioTabs";
 
 function Policy() {
@@ -35,11 +38,18 @@ function Policy() {
     navigate(tabs[newIndex].path);
   };
 
+  if (isNil(tabIndex)) {
+    return null;
+  }
+
   return (
     <div>
       <nav id="policy-nav">
-        {!isNil(tabIndex) && <RadioTabs tabIndex={tabIndex} tabsProps={tabs} onChange={handleTabChange} />}
+        <RadioTabs tabIndex={tabIndex} tabsProps={tabs} onChange={handleTabChange} />
       </nav>
+      {tabIndex === 0 && <Contract />}
+      {tabIndex === 1 && <Privacy />}
+      {tabIndex === 2 && <Cancellation />}
     </div>
   );
 }
