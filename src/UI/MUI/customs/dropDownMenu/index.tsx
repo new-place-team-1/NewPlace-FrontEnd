@@ -8,7 +8,7 @@ type MenuItem = {
   onClick: () => void;
 };
 
-interface IProps {
+export interface IProps {
   Icon: React.ElementType;
   menuItems: Array<MenuItem>;
 }

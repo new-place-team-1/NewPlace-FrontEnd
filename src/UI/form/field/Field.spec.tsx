@@ -1,34 +1,35 @@
-import { mount } from "@cypress/react";
 import { Formik, Form } from "formik";
-import { ThemeProvider } from "@mui/material/styles";
 
 import Field from ".";
-import theme from "src/utils/contexts/Theme";
+import setUp from "src/utils/test/setUp";
 
 describe("Field", () => {
-  beforeEach(function () {
-    this.props = {
-      label: "nickname",
-      color: "secondary",
-      variant: "standard",
-      type: "text",
-      name: "nickname",
-      placeholder: "type nickname...",
-    };
-    mount(
-      <ThemeProvider theme={theme}>
+  const defaultProps = {
+    label: "nickname",
+    color: "secondary",
+    variant: "standard",
+    type: "text",
+    name: "nickname",
+    placeholder: "type nickname...",
+  };
+
+  beforeEach(() => {
+    function TestComponent() {
+      return (
         <Formik initialValues={{ nickname: "" }} onSubmit={cy.stub()}>
           <Form>
-            <Field {...this.props} />
+            <Field {...defaultProps} />
           </Form>
         </Formik>
-      </ThemeProvider>,
-    );
+      );
+    }
+
+    setUp(TestComponent);
   });
 
-  it("Given props, Then render MUI-Field with props", function () {
+  it("Given props, Then render MUI-Field with props", () => {
     cy.get("input[name='nickname']")
-      .should("have.attr", "placeholder", this.props.placeholder)
+      .should("have.attr", "placeholder", defaultProps.placeholder)
       .and("have.attr", "type", "text");
   });
 });

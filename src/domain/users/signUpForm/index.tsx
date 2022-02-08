@@ -10,7 +10,7 @@ import { bankSelectOptions } from "src/config/banks";
 import { signUp } from "src/services/users";
 import { Typography, Paper, Button } from "src/UI/MUI";
 import { Description, ArrowBack } from "src/UI/MUI/icons";
-import CustomModal, { ModalSize } from "src/UI/MUI/customs/modal";
+import CustomModal from "src/UI/MUI/customs/modal";
 import CustomForm from "src/UI/form";
 import Field from "src/UI/form/field";
 import CheckboxField from "src/UI/form/checkboxField";
@@ -20,7 +20,7 @@ import Privacy from "src/templates/policy/Privacy";
 
 type ModalContent = "index" | "waitAuth" | "policyContract" | "policyPrivacy";
 
-interface IProps {
+export interface IProps {
   size: ModalSize;
   open: boolean;
   handleClose: () => void;

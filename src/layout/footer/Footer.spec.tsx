@@ -1,19 +1,9 @@
-import { mount } from "@cypress/react";
-import { ThemeProvider } from "@mui/material/styles";
-import { BrowserRouter } from "react-router-dom";
-
 import Footer from ".";
-import theme from "src/utils/contexts/Theme";
+import setUp from "src/utils/test/setUp";
 
 describe("Footer", () => {
   it("Render Links on Footer", () => {
-    mount(
-      <ThemeProvider theme={theme}>
-        <BrowserRouter>
-          <Footer />
-        </BrowserRouter>
-      </ThemeProvider>,
-    );
+    setUp(Footer);
 
     cy.get("footer");
     cy.contains("이용약관").should("exist");

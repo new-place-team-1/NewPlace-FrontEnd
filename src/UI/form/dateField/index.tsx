@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 import { DatePicker, TextField } from "src/UI/MUI";
 import StyledErrorMessage from "src/UI/form/shared/ErrorMessage.styled";
 
-interface IProps {
+export interface IProps {
   label: string;
   inputFormat: string;
   InputProps: any;

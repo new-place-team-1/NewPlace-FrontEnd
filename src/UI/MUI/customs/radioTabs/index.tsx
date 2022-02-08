@@ -5,7 +5,7 @@ type TabProps = {
   [prop: string]: any;
 };
 
-interface IProps {
+export interface IProps {
   tabIndex: number;
   tabsProps: Array<TabProps>;
   onChange: (newIndex: number) => void;

@@ -1,50 +1,50 @@
-import { mount } from "@cypress/react";
 import { Formik, Form } from "formik";
-import { ThemeProvider } from "@mui/material/styles";
 
 import SelectField from ".";
-import theme from "src/utils/contexts/Theme";
+import setUp from "src/utils/test/setUp";
 
 describe("SelectField", () => {
-  beforeEach(function () {
-    this.props = {
-      color: "secondary",
-      name: "select",
-      label: "select",
-      labelId: "select-label",
-      options: [
-        {
-          id: 0,
-          value: "",
-          label: "-",
-        },
-        {
-          id: 1,
-          value: "a",
-          label: "A",
-        },
-        {
-          id: 2,
-          value: "b",
-          label: "B",
-        },
-        {
-          id: 3,
-          value: "c",
-          label: "C",
-        },
-      ],
-    };
+  const defaultProps = {
+    color: "secondary",
+    name: "select",
+    label: "select",
+    labelId: "select-label",
+    options: [
+      {
+        id: 0,
+        value: "",
+        label: "-",
+      },
+      {
+        id: 1,
+        value: "a",
+        label: "A",
+      },
+      {
+        id: 2,
+        value: "b",
+        label: "B",
+      },
+      {
+        id: 3,
+        value: "c",
+        label: "C",
+      },
+    ],
+  };
 
-    mount(
-      <ThemeProvider theme={theme}>
-        <Formik initialValues={{ agree: false }} onSubmit={cy.stub().as("onSubmit")}>
+  beforeEach(() => {
+    function TestComponent() {
+      return (
+        <Formik initialValues={{ character: "" }} onSubmit={cy.stub().as("onSubmit")}>
           <Form>
-            <SelectField {...this.props} />
+            <SelectField {...defaultProps} />
           </Form>
         </Formik>
-      </ThemeProvider>,
-    );
+      );
+    }
+
+    setUp(TestComponent);
   });
 
   it("Given props, Then render MUI-Field with props with empty value", () => {

@@ -1,24 +1,18 @@
-import { mount } from "@cypress/react";
-import { ThemeProvider } from "@mui/material/styles";
-
-import BottomMenu from ".";
-import theme from "src/utils/contexts/Theme";
+import BottomMenu, { IProps } from ".";
+import setUp from "src/utils/test/setUp";
 
 describe("Header", () => {
-  beforeEach(function () {
-    this.props = {
+  beforeEach(() => {
+    const defaultProps: IProps = {
+      handleSignInFormOpen: cy.stub(),
       handleSignUpFormOpen: cy.stub().as("handleSignUpFormOpen"),
     };
-
-    mount(
-      <ThemeProvider theme={theme}>
-        <BottomMenu {...this.props} />
-      </ThemeProvider>,
-    );
+    setUp(BottomMenu, defaultProps);
   });
 
-  it("Given Render sign-up menu, When click it, Then call handleSignUpFormOpen", () => {
+  it("Given sign-up menu button, When click it, Then call handleSignUpFormOpen", () => {
     cy.contains("회원가입").click();
+
     cy.get("@handleSignUpFormOpen").should("have.been.calledOnce");
   });
 });

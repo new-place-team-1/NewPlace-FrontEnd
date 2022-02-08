@@ -1,13 +1,10 @@
-import { mount } from "@cypress/react";
-import { ThemeProvider } from "@mui/material/styles";
-
-import DropDownMenu from ".";
+import DropDownMenu, { IProps } from ".";
 import { AccountCircle } from "src/UI/MUI/icons";
-import theme from "src/utils/contexts/Theme";
+import setUp from "src/utils/test/setUp";
 
 describe("DropDownMenu", () => {
-  beforeEach(function () {
-    this.props = {
+  beforeEach(() => {
+    const defaultProps: IProps = {
       Icon: AccountCircle,
       menuItems: [
         {
@@ -24,21 +21,20 @@ describe("DropDownMenu", () => {
         },
       ],
     };
-    mount(
-      <ThemeProvider theme={theme}>
-        <DropDownMenu {...this.props} />
-      </ThemeProvider>,
-    );
+
+    setUp(DropDownMenu, defaultProps);
+    cy.wrap(defaultProps).as("defaultProps");
   });
 
-  it("Given menuItems, Then render Icon, not items yet", function () {
-    cy.get(".drop-down-menu-container").as("dropDownMenuContainer");
-    cy.get("@dropDownMenuContainer").find(".drop-down-menu-icon");
+  it("Given menuItems, Then render Icon, not items yet", () => {
+    cy.get(".drop-down-menu-container").as("dropDownMenuContainer").should("exist");
+    cy.get("@dropDownMenuContainer").find(".drop-down-menu-icon").should("exist");
     cy.get("@dropDownMenuContainer").find(".drop-down-menu-item").should("have.length", 0);
   });
 
-  it("When click Icon to toggle, Then render items", function () {
+  it("When click Icon to toggle, Then render items", () => {
     cy.get(".drop-down-menu-icon").click();
+
     cy.get(".drop-down-menu-container .drop-down-menu-item").should($elements => {
       expect($elements).to.have.length(3);
       expect($elements.eq(0)).to.contain("마이페이지");
@@ -47,15 +43,14 @@ describe("DropDownMenu", () => {
     });
   });
 
-  it("When click each item, Then call each onClick callback", function () {
+  it("When click each item, Then call each onClick callback", () => {
     cy.get(".drop-down-menu-icon").click();
     cy.get(".drop-down-menu-container .drop-down-menu-item")
       .as("items")
-      .each($element => {
+      .each(($element, index) => {
         cy.wrap($element).click();
+
+        cy.get("@defaultProps").its("menuItems").its(index).its("onClick").should("be.calledOnce");
       });
-    cy.get("@items").each((_, index) => {
-      expect(this.props.menuItems[index].onClick).to.be.calledOnce;
-    });
   });
 });

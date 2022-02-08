@@ -1,44 +1,33 @@
-import { mount } from "@cypress/react";
-import { BrowserRouter } from "react-router-dom";
-
 import Layout from ".";
+import setUp from "src/utils/test/setUp";
 import { viewportSizeForTest } from "src/config/device";
 
 describe("Layout", () => {
-  it("Render header, footer", () => {
-    cy.viewport(viewportSizeForTest.mobile.width, viewportSizeForTest.mobile.height);
-
-    mount(
-      <BrowserRouter>
-        <Layout />
-      </BrowserRouter>,
-    );
-
-    cy.get("header").should("exist");
-    cy.get("footer").should("exist");
+  beforeEach(() => {
+    setUp(Layout);
   });
 
-  it("When viewport width <= 992, Then render BottomMenu", () => {
-    cy.viewport(viewportSizeForTest.mobile.width, viewportSizeForTest.mobile.height);
+  describe("When viewport width <= 992, Then mobile view", () => {
+    beforeEach(() => {
+      cy.viewport(viewportSizeForTest.mobile.width, viewportSizeForTest.mobile.height);
+    });
 
-    mount(
-      <BrowserRouter>
-        <Layout />
-      </BrowserRouter>,
-    );
-
-    cy.get("#bottom-menu").should("exist");
+    it("Render header, footer, BottomMenu", () => {
+      cy.get("header").should("exist");
+      cy.get("footer").should("exist");
+      cy.get("#bottom-menu").should("exist");
+    });
   });
 
-  it("When viewport width > 992, Then not render BottomMenu", () => {
-    cy.viewport(viewportSizeForTest.desktop.width, viewportSizeForTest.desktop.height);
+  describe("When viewpoprt width > 992, Then Desktop view", () => {
+    beforeEach(() => {
+      cy.viewport(viewportSizeForTest.desktop.width, viewportSizeForTest.desktop.height);
+    });
 
-    mount(
-      <BrowserRouter>
-        <Layout />
-      </BrowserRouter>,
-    );
-
-    cy.get("#bottom-menu").should("not.exist");
+    it("Render header, footer, not BottomMenu", () => {
+      cy.get("header").should("exist");
+      cy.get("footer").should("exist");
+      cy.get("#bottom-menu").should("not.exist");
+    });
   });
 });

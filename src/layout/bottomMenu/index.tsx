@@ -1,7 +1,7 @@
 import { BottomNavigation, BottomNavigationAction, Paper } from "src/UI/MUI";
 import { SupportAgent, People, Login } from "src/UI/MUI/icons";
 
-interface IProps {
+export interface IProps {
   handleSignUpFormOpen: () => void;
   handleSignInFormOpen: () => void;
 }

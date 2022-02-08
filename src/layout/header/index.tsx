@@ -19,10 +19,7 @@ function MobileHeader() {
   );
 }
 
-interface IPropsOfDesktopHeader {
-  handleSignUpFormOpen: () => void;
-  handleSignInFormOpen: () => void;
-}
+interface IPropsOfDesktopHeader extends IProps {}
 
 function DesktopHeader({ handleSignUpFormOpen, handleSignInFormOpen }: IPropsOfDesktopHeader) {
   return (
@@ -42,7 +39,7 @@ function DesktopHeader({ handleSignUpFormOpen, handleSignInFormOpen }: IPropsOfD
   );
 }
 
-interface IProps {
+export interface IProps {
   handleSignUpFormOpen: () => void;
   handleSignInFormOpen: () => void;
 }

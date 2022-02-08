@@ -1,29 +1,29 @@
-import { mount } from "@cypress/react";
 import { Formik, Form } from "formik";
-import { ThemeProvider } from "@mui/material/styles";
 
 import CheckboxField from ".";
-import theme from "src/utils/contexts/Theme";
+import setUp from "src/utils/test/setUp";
 
 describe("CheckboxField", () => {
-  beforeEach(function () {
-    this.props = {
-      defaultChecked: false,
-      color: "secondary",
-      name: "agree",
-      label: "agree",
-      size: "small",
-    };
+  const defaultProps = {
+    defaultChecked: false,
+    color: "secondary",
+    name: "agree",
+    label: "agree",
+    size: "small",
+  };
 
-    mount(
-      <ThemeProvider theme={theme}>
+  beforeEach(() => {
+    function TestComponent() {
+      return (
         <Formik initialValues={{ agree: false }} onSubmit={cy.stub().as("onSubmit")}>
           <Form>
-            <CheckboxField {...this.props} />
+            <CheckboxField {...defaultProps} />
           </Form>
         </Formik>
-      </ThemeProvider>,
-    );
+      );
+    }
+
+    setUp(TestComponent);
   });
 
   it("Given props, Then render MUI-Field with props", () => {
@@ -31,7 +31,9 @@ describe("CheckboxField", () => {
   });
 
   it("When click and submit, Then call onSubmit with proper arguments", () => {
-    cy.get(".checkbox-field input").type("{enter}").should("not.have.attr", "checked", true);
+    cy.get(".checkbox-field input").as("checkbox").type("{enter}");
+
+    cy.get("@checkbox").should("not.have.attr", "checked", true);
     cy.get("@onSubmit").should("have.been.calledOnceWith", { agree: true });
   });
 });

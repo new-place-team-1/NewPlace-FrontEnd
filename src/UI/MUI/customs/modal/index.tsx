@@ -1,7 +1,5 @@
 import { Modal, Paper } from "src/UI/MUI";
 
-export type ModalSize = "small" | "medium" | "large";
-
 interface IProps {
   open: boolean;
   onClose: () => void;
