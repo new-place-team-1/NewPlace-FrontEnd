@@ -9,7 +9,7 @@ https://github.com/saySthAbout/NewPlace-Docs/blob/main/%ED%94%84%EB%A1%A0%ED%8A%
 ### NewPlace-FrontEnd 프로젝트 로컬 세팅 CLI 명령어 순서
 
 ```
-git clone https://github.com/cocoder16/NewPlace-FrontEnd.git
+git clone https://github.com/saySthAbout/NewPlace-FrontEnd.git
 cd newplace-frontend
 
 yarn
