@@ -1,23 +1,21 @@
-import { ThemeProvider } from "@mui/material/styles";
-import AdapterDayjs from "@mui/lab/AdapterDayjs";
+import { mount } from "@cypress/react";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import AdapterDayjs from "@mui/lab/AdapterDayjs";
+import { ThemeProvider } from "@mui/material/styles";
 import { BrowserRouter } from "react-router-dom";
 
 import theme from "src/utils/contexts/Theme";
-import Layout from "src/layout";
 
-function App() {
-  return (
+const setUp = (TestComponent: any, props?: object) => {
+  mount(
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
-          <div id="app">
-            <Layout />
-          </div>
+          <TestComponent {...props} />
         </BrowserRouter>
       </ThemeProvider>
-    </LocalizationProvider>
+    </LocalizationProvider>,
   );
-}
+};
 
-export default App;
+export default setUp;

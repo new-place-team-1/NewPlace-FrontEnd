@@ -1,13 +1,49 @@
+* {
+  font-family: "Noto Sans KR", sans-serif;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+#app {
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+}
+
+address {
+  font-style: normal;
+}
+
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.swal2-container {
+  z-index: 99999 !important;
+}
+
+.swal2-title {
+  font-size: 24px !important;
+}
+
+.swal2-html-container {
+  font-size: 18px !important;
+}
+
+.swal2-popup {
+  width: 480px !important;
+}
+
+.swal2-styled.swal2-confirm {
+  width: 105px;
+  height: 42px;
+  background-color: #f73f52; /* primary.main */
 }
