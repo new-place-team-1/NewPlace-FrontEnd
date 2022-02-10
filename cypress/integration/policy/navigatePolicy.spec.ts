@@ -2,7 +2,7 @@
 
 import palette from "src/config/styles/palette";
 
-describe.only("navigate policy", () => {
+describe("navigate policy", () => {
   const HOST_URL = Cypress.env("REACT_APP_HOST_URL");
   const contractPath = "/policy/contract";
   const privacyPath = "/policy/privacy";
