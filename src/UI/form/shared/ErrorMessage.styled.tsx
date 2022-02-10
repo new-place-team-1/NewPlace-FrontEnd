@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import palette from "src/utils/styles/palette";
+import palette from "src/config/styles/palette";
 
 const StyledErrorMessage = styled.div`
   color: ${palette.primary.main};

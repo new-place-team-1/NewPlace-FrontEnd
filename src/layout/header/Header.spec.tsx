@@ -4,6 +4,7 @@ import { viewportSizeForTest } from "src/config/device";
 
 describe("Header", () => {
   const defaultProps: IProps = {
+    isDesktopSize: false,
     handleSignInFormOpen: () => {},
     handleSignUpFormOpen: () => {},
   };
@@ -19,6 +20,8 @@ describe("Header", () => {
   });
 
   it("When viewport width > 992, Then render DesktopHeader", () => {
+    setUp(Header, { ...defaultProps, isDesktopSize: true });
+
     cy.viewport(viewportSizeForTest.desktop.width, viewportSizeForTest.desktop.height);
 
     cy.get("#desktop-header").should("exist");

@@ -3,6 +3,7 @@ import { useMediaQuery } from "react-responsive";
 
 import { sizeBoundary } from "src/config/device";
 import Header from "src/layout/header";
+import Main from "src/layout/main";
 import Footer from "src/layout/footer";
 import BottomMenu from "src/layout/bottomMenu";
 import SignUpForm from "src/domain/users/signUpForm";
@@ -14,7 +15,7 @@ function Layout() {
   const [isSignInFormModalOpen, setIsSignInFormModalOpen] = useState<boolean>(false);
   const [isSnackbarOpen, setIsSnackbarOpen] = useState<boolean>(false);
   const [snackbarMessage, setSnackbarMessage] = useState<string>("");
-  const isDesktopsize = useMediaQuery({
+  const isDesktopSize = useMediaQuery({
     query: `(min-width: ${sizeBoundary}px)`,
   });
 
@@ -49,18 +50,23 @@ function Layout() {
 
   return (
     <Fragment>
-      <Header handleSignUpFormOpen={handleSignUpFormOpen} handleSignInFormOpen={handleSignInFormOpen} />
-      <Footer />
-      {!isDesktopsize && (
+      <Header
+        isDesktopSize={isDesktopSize}
+        handleSignUpFormOpen={handleSignUpFormOpen}
+        handleSignInFormOpen={handleSignInFormOpen}
+      />
+      <Main isDesktopSize={isDesktopSize} />
+      <Footer isDesktopSize={isDesktopSize} />
+      {!isDesktopSize && (
         <BottomMenu handleSignUpFormOpen={handleSignUpFormOpen} handleSignInFormOpen={handleSignInFormOpen} />
       )}
       <SignUpForm
         open={isSignUpFormModalOpen}
         handleClose={handleSignUpFormClose}
-        size={isDesktopsize ? "medium" : "small"}
+        size={isDesktopSize ? "medium" : "small"}
       />
       <SignInForm
-        size={isDesktopsize ? "medium" : "small"}
+        size={isDesktopSize ? "medium" : "small"}
         open={isSignInFormModalOpen}
         handleClose={handleSignInFormClose}
       />

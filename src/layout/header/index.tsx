@@ -1,8 +1,6 @@
 import { Fragment } from "react";
-import { useMediaQuery } from "react-responsive";
 
 import { StyledMobileHeader, StyledDesktopHeader } from "./Header.styled";
-import { sizeBoundary } from "src/config/device";
 import { ReactComponent as Logo } from "src/assets/images/logo.svg";
 import { Button } from "src/UI/MUI";
 import { AccountCircle, ArrowBack } from "src/UI/MUI/icons";
@@ -19,7 +17,10 @@ function MobileHeader() {
   );
 }
 
-interface IPropsOfDesktopHeader extends IProps {}
+interface IPropsOfDesktopHeader {
+  handleSignUpFormOpen: () => void;
+  handleSignInFormOpen: () => void;
+}
 
 function DesktopHeader({ handleSignUpFormOpen, handleSignInFormOpen }: IPropsOfDesktopHeader) {
   return (
@@ -40,18 +41,15 @@ function DesktopHeader({ handleSignUpFormOpen, handleSignInFormOpen }: IPropsOfD
 }
 
 export interface IProps {
+  isDesktopSize: boolean;
   handleSignUpFormOpen: () => void;
   handleSignInFormOpen: () => void;
 }
 
-function Header({ handleSignUpFormOpen, handleSignInFormOpen }: IProps) {
-  const isDesktopsize = useMediaQuery({
-    query: `(min-width: ${sizeBoundary}px)`,
-  });
-
+function Header({ isDesktopSize, handleSignUpFormOpen, handleSignInFormOpen }: IProps) {
   return (
     <Fragment>
-      {isDesktopsize ? (
+      {isDesktopSize ? (
         <DesktopHeader handleSignUpFormOpen={handleSignUpFormOpen} handleSignInFormOpen={handleSignInFormOpen} />
       ) : (
         <MobileHeader />

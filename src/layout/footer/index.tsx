@@ -1,17 +1,15 @@
 import { Typography } from "@mui/material";
-import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
 
 import StyledFooter from "./Footer.styled";
-import { sizeBoundary } from "src/config/device";
 
-function Footer() {
-  const isDesktopsize = useMediaQuery({
-    query: `(min-width: ${sizeBoundary}px)`,
-  });
+interface IProps {
+  isDesktopSize: boolean;
+}
 
+function Footer({ isDesktopSize }: IProps) {
   return (
-    <StyledFooter isDesktopsize={isDesktopsize}>
+    <StyledFooter isDesktopSize={isDesktopSize}>
       <nav>
         <Link to="/policy/contract">이용약관</Link>
         <Link to="/policy/privacy">개인정보 처리방침</Link>

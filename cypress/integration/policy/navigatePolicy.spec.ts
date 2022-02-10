@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import palette from "src/utils/styles/palette";
+import palette from "src/config/styles/palette";
 
 describe.only("navigate policy", () => {
   const HOST_URL = Cypress.env("REACT_APP_HOST_URL");
