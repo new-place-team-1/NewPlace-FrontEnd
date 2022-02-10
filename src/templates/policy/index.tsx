@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Navigate } from "react-router-dom";
 import { isNil } from "lodash";
 
 import Contract from "./Contract";
@@ -23,16 +23,9 @@ function Policy() {
 
   useEffect(() => {
     const tabIndex = tabs.findIndex(tab => tab.path.split("/policy/")[1] === routeParams.tab);
-    const existTabIndex = tabIndex > -1;
 
-    if (existTabIndex) {
-      setTabIndex(tabIndex);
-    }
-
-    if (!existTabIndex) {
-      navigate("/not-found");
-    }
-  }, [routeParams, tabs, navigate]);
+    setTabIndex(tabIndex);
+  }, [routeParams, tabs]);
 
   const handleTabChange = (newIndex: number) => {
     navigate(tabs[newIndex].path);
@@ -50,6 +43,7 @@ function Policy() {
       {tabIndex === 0 && <Contract />}
       {tabIndex === 1 && <Privacy />}
       {tabIndex === 2 && <Cancellation />}
+      {tabIndex === -1 && <Navigate to="/not-found" replace />}
     </div>
   );
 }

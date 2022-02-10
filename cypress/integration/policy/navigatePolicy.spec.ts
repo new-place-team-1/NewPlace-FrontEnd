@@ -7,6 +7,8 @@ describe("navigate policy", () => {
   const contractPath = "/policy/contract";
   const privacyPath = "/policy/privacy";
   const cancellationPath = "/policy/cancellation";
+  const invalidPath = "/policy/cancollation";
+  const notFoundPath = "/not-found";
 
   describe("footer", () => {
     beforeEach(() => {
@@ -32,7 +34,7 @@ describe("navigate policy", () => {
     });
   });
 
-  describe("policy", () => {
+  describe("policy path", () => {
     it("When visit /policy/contract, Then render nav and 이용약관", () => {
       cy.visit(`${HOST_URL}${contractPath}`);
 
@@ -85,6 +87,12 @@ describe("navigate policy", () => {
       cy.url().should("eq", `${HOST_URL}${cancellationPath}`);
       cy.get("@activeTab").should("have.css", "color", `${palette.primary.main}`);
       cy.get("#policy-cancellation").should("exist");
+    });
+
+    it("When visit invalid /policy/*, Then redirect not found page", () => {
+      cy.visit(`${HOST_URL}${invalidPath}`);
+
+      cy.url().should("eq", `${HOST_URL}${notFoundPath}`);
     });
   });
 });
