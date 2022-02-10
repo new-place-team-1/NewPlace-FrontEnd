@@ -20,11 +20,11 @@ interface ISignUpRequestPayload {
   accountNumber?: string;
 }
 
-interface ISignInFormValues {
+interface ILogInFormValues {
   email: string;
   password: string;
 }
-interface ISignInRequestPayload {
+interface ILogInRequestPayload {
   email: string;
   password: string;
 }

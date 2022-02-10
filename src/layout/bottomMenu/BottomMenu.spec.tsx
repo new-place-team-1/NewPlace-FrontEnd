@@ -4,7 +4,7 @@ import setUp from "src/utils/test/setUp";
 describe("Header", () => {
   beforeEach(() => {
     const defaultProps: IProps = {
-      handleSignInFormOpen: cy.stub(),
+      handleLogInFormOpen: cy.stub(),
       handleSignUpFormOpen: cy.stub().as("handleSignUpFormOpen"),
     };
     setUp(BottomMenu, defaultProps);

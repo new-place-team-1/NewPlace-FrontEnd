@@ -7,12 +7,12 @@ import Main from "src/layout/main";
 import Footer from "src/layout/footer";
 import BottomMenu from "src/layout/bottomMenu";
 import SignUpForm from "src/domain/users/signUpForm";
-import SignInForm from "src/domain/users/signInForm";
+import LogInForm from "src/domain/users/logInForm";
 import { Snackbar, Alert } from "src/UI/MUI";
 
 function Layout() {
   const [isSignUpFormModalOpen, setIsSignUpFormModalOpen] = useState<boolean>(false);
-  const [isSignInFormModalOpen, setIsSignInFormModalOpen] = useState<boolean>(false);
+  const [isLogInFormModalOpen, setIsLogInFormModalOpen] = useState<boolean>(false);
   const [isSnackbarOpen, setIsSnackbarOpen] = useState<boolean>(false);
   const [snackbarMessage, setSnackbarMessage] = useState<string>("");
   const isDesktopSize = useMediaQuery({
@@ -27,12 +27,12 @@ function Layout() {
     setIsSignUpFormModalOpen(false);
   };
 
-  const handleSignInFormOpen = () => {
-    setIsSignInFormModalOpen(true);
+  const handleLogInFormOpen = () => {
+    setIsLogInFormModalOpen(true);
   };
 
-  const handleSignInFormClose = () => {
-    setIsSignInFormModalOpen(false);
+  const handleLogInFormClose = () => {
+    setIsLogInFormModalOpen(false);
   };
 
   const handleSnackbarOpen = (message: string) => {
@@ -53,24 +53,24 @@ function Layout() {
       <Header
         isDesktopSize={isDesktopSize}
         handleSignUpFormOpen={handleSignUpFormOpen}
-        handleSignInFormOpen={handleSignInFormOpen}
+        handleLogInFormOpen={handleLogInFormOpen}
       />
       <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
         <Main isDesktopSize={isDesktopSize} />
         <Footer isDesktopSize={isDesktopSize} />
       </div>
       {!isDesktopSize && (
-        <BottomMenu handleSignUpFormOpen={handleSignUpFormOpen} handleSignInFormOpen={handleSignInFormOpen} />
+        <BottomMenu handleSignUpFormOpen={handleSignUpFormOpen} handleLogInFormOpen={handleLogInFormOpen} />
       )}
       <SignUpForm
         open={isSignUpFormModalOpen}
         handleClose={handleSignUpFormClose}
         size={isDesktopSize ? "medium" : "small"}
       />
-      <SignInForm
+      <LogInForm
         size={isDesktopSize ? "medium" : "small"}
-        open={isSignInFormModalOpen}
-        handleClose={handleSignInFormClose}
+        open={isLogInFormModalOpen}
+        handleClose={handleLogInFormClose}
       />
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "right" }}

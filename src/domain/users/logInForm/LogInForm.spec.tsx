@@ -1,7 +1,7 @@
-import SignInForm, { IProps } from ".";
+import LogInForm, { IProps } from ".";
 import setUp from "src/utils/test/setUp";
 
-describe("SignInForm", () => {
+describe("LogInForm", () => {
   const defaultProps: IProps = {
     size: "small",
     open: true,
@@ -9,11 +9,11 @@ describe("SignInForm", () => {
   };
 
   beforeEach(() => {
-    setUp(SignInForm, defaultProps);
+    setUp(LogInForm, defaultProps);
   });
 
   it("Given open=false, Then close Modal", () => {
-    setUp(SignInForm, { ...defaultProps, open: false });
+    setUp(LogInForm, { ...defaultProps, open: false });
 
     cy.get("#sign-in-form").should("not.exist");
   });
@@ -27,7 +27,7 @@ describe("SignInForm", () => {
   });
 
   it("When click outside, Then call handleClose", () => {
-    setUp(SignInForm, { ...defaultProps, handleClose: cy.stub().as("handleClose") });
+    setUp(LogInForm, { ...defaultProps, handleClose: cy.stub().as("handleClose") });
 
     cy.get("#sign-in-form").click(1, 1);
 

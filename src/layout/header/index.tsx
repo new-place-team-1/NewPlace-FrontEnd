@@ -19,10 +19,10 @@ function MobileHeader() {
 
 interface IPropsOfDesktopHeader {
   handleSignUpFormOpen: () => void;
-  handleSignInFormOpen: () => void;
+  handleLogInFormOpen: () => void;
 }
 
-function DesktopHeader({ handleSignUpFormOpen, handleSignInFormOpen }: IPropsOfDesktopHeader) {
+function DesktopHeader({ handleSignUpFormOpen, handleLogInFormOpen }: IPropsOfDesktopHeader) {
   return (
     <StyledDesktopHeader id="desktop-header">
       <Logo width={180} height={42} />
@@ -32,7 +32,7 @@ function DesktopHeader({ handleSignUpFormOpen, handleSignInFormOpen }: IPropsOfD
         <Button color="secondary" onClick={handleSignUpFormOpen}>
           회원가입
         </Button>
-        <Button variant="outlined" size="large" onClick={handleSignInFormOpen}>
+        <Button variant="outlined" size="large" onClick={handleLogInFormOpen}>
           로그인
         </Button>
       </div>
@@ -43,14 +43,14 @@ function DesktopHeader({ handleSignUpFormOpen, handleSignInFormOpen }: IPropsOfD
 export interface IProps {
   isDesktopSize: boolean;
   handleSignUpFormOpen: () => void;
-  handleSignInFormOpen: () => void;
+  handleLogInFormOpen: () => void;
 }
 
-function Header({ isDesktopSize, handleSignUpFormOpen, handleSignInFormOpen }: IProps) {
+function Header({ isDesktopSize, handleSignUpFormOpen, handleLogInFormOpen }: IProps) {
   return (
     <Fragment>
       {isDesktopSize ? (
-        <DesktopHeader handleSignUpFormOpen={handleSignUpFormOpen} handleSignInFormOpen={handleSignInFormOpen} />
+        <DesktopHeader handleSignUpFormOpen={handleSignUpFormOpen} handleLogInFormOpen={handleLogInFormOpen} />
       ) : (
         <MobileHeader />
       )}

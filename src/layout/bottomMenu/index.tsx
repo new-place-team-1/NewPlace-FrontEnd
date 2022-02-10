@@ -3,10 +3,10 @@ import { SupportAgent, People, Login } from "src/UI/MUI/icons";
 
 export interface IProps {
   handleSignUpFormOpen: () => void;
-  handleSignInFormOpen: () => void;
+  handleLogInFormOpen: () => void;
 }
 
-function BottomMenu({ handleSignUpFormOpen, handleSignInFormOpen }: IProps) {
+function BottomMenu({ handleSignUpFormOpen, handleLogInFormOpen }: IProps) {
   return (
     <Paper id="bottom-menu" sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }} elevation={3}>
       <BottomNavigation
@@ -14,14 +14,14 @@ function BottomMenu({ handleSignUpFormOpen, handleSignInFormOpen }: IProps) {
         onChange={(event, newValue) => {
           // TODO: 각 메뉴에따라 history.push 혹은 모달 open
           const signUp = newValue === 1;
-          const signIn = newValue === 2;
+          const logIn = newValue === 2;
 
           if (signUp) {
             handleSignUpFormOpen();
           }
 
-          if (signIn) {
-            handleSignInFormOpen();
+          if (logIn) {
+            handleLogInFormOpen();
           }
         }}
       >

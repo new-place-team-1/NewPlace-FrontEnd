@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 
 import regExp from "src/config/regExp";
 import { validationMessage, alertMessage } from "src/config/message";
-import { signIn } from "src/services/users";
+import { logIn } from "src/services/users";
 import { Typography, Paper, Button } from "src/UI/MUI";
 import CustomModal from "src/UI/MUI/customs/modal";
 import CustomForm from "src/UI/form";
@@ -16,7 +16,7 @@ export interface IProps {
   handleClose: () => void;
 }
 
-function SignInForm({ size, open, handleClose }: IProps) {
+function LogInForm({ size, open, handleClose }: IProps) {
   const initialValues = {
     email: "",
     password: "",
@@ -29,8 +29,8 @@ function SignInForm({ size, open, handleClose }: IProps) {
   });
 
   const handleSubmit = useCallback(
-    (values: ISignInFormValues, actions) => {
-      signIn(values)
+    (values: ILogInFormValues, actions) => {
+      logIn(values)
         .then(() => {
           handleClose();
         })
@@ -38,8 +38,8 @@ function SignInForm({ size, open, handleClose }: IProps) {
           actions.setSubmitting(false);
           Swal.fire({
             icon: "error",
-            title: alertMessage.signIn.error.title,
-            text: alertMessage.signIn.error.text,
+            title: alertMessage.logIn.error.title,
+            text: alertMessage.logIn.error.text,
           });
         });
     },
@@ -73,4 +73,4 @@ function SignInForm({ size, open, handleClose }: IProps) {
   );
 }
 
-export default SignInForm;
+export default LogInForm;

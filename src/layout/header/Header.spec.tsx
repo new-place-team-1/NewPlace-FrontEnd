@@ -5,7 +5,7 @@ import { viewportSizeForTest } from "src/config/device";
 describe("Header", () => {
   const defaultProps: IProps = {
     isDesktopSize: false,
-    handleSignInFormOpen: () => {},
+    handleLogInFormOpen: () => {},
     handleSignUpFormOpen: () => {},
   };
 

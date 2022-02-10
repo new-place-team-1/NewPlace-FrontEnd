@@ -34,7 +34,7 @@ export const alertMessage = {
       text: "회원가입에 실패했습니다. 다시 요청해주세요.",
     },
   },
-  signIn: {
+  logIn: {
     error: {
       title: "로그인 실패",
       text: "이메일이나 패스워드가 올바르지 않습니다.",

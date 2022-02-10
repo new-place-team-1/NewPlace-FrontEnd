@@ -120,7 +120,7 @@ describe("sign in", () => {
         cy.contains("비밀번호").closest(".field").find("input").type(typedValue.password);
         cy.contains("계속").click();
 
-        cy.contains(alertMessage.signIn.error.title);
+        cy.contains(alertMessage.logIn.error.title);
         cy.get(".spinner").should("not.exist");
         // TODO: token 정하기
         // cy.getCookie("token").should("not.exist");

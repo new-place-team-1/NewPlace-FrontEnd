@@ -9,7 +9,7 @@ export const signUp = (payload: ISignUpRequestPayload) =>
     data: payload,
   });
 
-export const signIn = (payload: ISignInRequestPayload) =>
+export const logIn = (payload: ILogInRequestPayload) =>
   axios({
     method: "post",
     url: API_URL + USERS.LOGIN,
