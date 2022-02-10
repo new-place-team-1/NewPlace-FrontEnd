@@ -12,6 +12,7 @@ const StyledFooter = styled.footer`
   background-color: white;
   padding: ${({ isDesktopSize }: IProps) => (isDesktopSize ? "14px" : "6px")} clamp(6px, 8vw, 170px);
   margin-bottom: ${({ isDesktopSize }: IProps) => (isDesktopSize ? 0 : `${bottomMenuHeight}px`)};
+  margin-top: auto;
 
   p,
   a,

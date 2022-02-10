@@ -55,8 +55,10 @@ function Layout() {
         handleSignUpFormOpen={handleSignUpFormOpen}
         handleSignInFormOpen={handleSignInFormOpen}
       />
-      <Main isDesktopSize={isDesktopSize} />
-      <Footer isDesktopSize={isDesktopSize} />
+      <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+        <Main isDesktopSize={isDesktopSize} />
+        <Footer isDesktopSize={isDesktopSize} />
+      </div>
       {!isDesktopSize && (
         <BottomMenu handleSignUpFormOpen={handleSignUpFormOpen} handleSignInFormOpen={handleSignInFormOpen} />
       )}
