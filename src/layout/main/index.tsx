@@ -1,7 +1,5 @@
-import { Routes, Route } from "react-router-dom";
-
 import { StyledMain, StyledMainContent } from "./Main.styled";
-import Policy from "src/templates/policy";
+import MainRoutes from "src/routes/MainRoutes";
 
 interface IProps {
   isDesktopSize: boolean;
@@ -11,11 +9,7 @@ function Main({ isDesktopSize }: IProps) {
   return (
     <StyledMain isDesktopSize={isDesktopSize}>
       <StyledMainContent>
-        <Routes>
-          <Route path="/">
-            <Route path="policy/:tab" element={<Policy />} />
-          </Route>
-        </Routes>
+        <MainRoutes />
       </StyledMainContent>
     </StyledMain>
   );
